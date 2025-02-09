@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://resources/experimental/envs/3d_test_environment.gd" id="1_y1xw8"]
 [ext_resource type="Script" path="res://resources/experimental/envs/area_3d.gd" id="2_7mkyk"]
-[ext_resource type="PackedScene" uid="uid://cbnbvr3o76psi" path="res://resources/scenes/ui/auguma_UI.tscn" id="2_8pysw"]
+[ext_resource type="PackedScene" uid="uid://cbnbvr3o76psi" path="res://resources/scenes/ui/augma_UI.tscn" id="2_8pysw"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_6nfjp"]
 size = Vector2(2, 1)

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bdw2j5kejiegc" path="res://assets/textures/grids/Dark/texture_01.png" id="1_0n8st"]
 [ext_resource type="Script" path="res://resources/scenes/main/world.gd" id="1_17slo"]
 [ext_resource type="Script" path="res://resources/scripts/camera/android_camera.gd" id="2_vpp10"]
-[ext_resource type="PackedScene" uid="uid://cbnbvr3o76psi" path="res://resources/scenes/ui/auguma_UI.tscn" id="4_snjl1"]
+[ext_resource type="PackedScene" uid="uid://cbnbvr3o76psi" path="res://resources/scenes/ui/augma_UI.tscn" id="4_snjl1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0cto1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -50,4 +50,4 @@ material = SubResource("StandardMaterial3D_kl206")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("2_vpp10")
 
-[node name="Control" parent="." instance=ExtResource("4_snjl1")]
+[node name="AugmaUI" parent="." instance=ExtResource("4_snjl1")]

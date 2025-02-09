@@ -24,7 +24,7 @@ msdf_size = 64
 [sub_resource type="LabelSettings" id="LabelSettings_y36t5"]
 font = SubResource("SystemFont_r3ts8")
 
-[node name="Control" type="Control" groups=["global_controller"]]
+[node name="AugmaUI" type="Control" groups=["global_controller"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
