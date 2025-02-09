@@ -9,7 +9,7 @@
 
 Augma Link is a project that attempts to recreate the interface and functionality of the movie *Sword Art Online: Ordinal Scale*, with icons and functionality created with GDScript. using [Redot Engine](https://www.redotengine.org) as the main engine.
 
-![screenshot](preview.png)
+![screenshot](readme_demos/preview.png)
 
 # Applications
 
