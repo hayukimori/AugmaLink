@@ -67,10 +67,7 @@ Some icons for this project were found on Google Fonts, and the icons related to
 
 these are some examples of what inkscape can do.
 <br>
-<br>
-<br>
-<br>
-<br>
+
 
 
 ![texture2](assets/textures/UI_items/SAO_OS_BOTTOMLAYER.png)
