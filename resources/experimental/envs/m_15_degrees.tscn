@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://by0f7vk3h54dg"]
+
+[ext_resource type="ArrayMesh" uid="uid://dnygtuix2u6jh" path="res://resources/experimental/envs/m_15_degrees.tres" id="1_4i4mw"]
+
+[node name="m15degrees" type="Node3D"]
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.77673, 0.0174524, 0, -0.0310129, 0.999848, 0, 0, 0, 1, 0.0122812, -0.000354767, -0.00194359)
+mesh = ExtResource("1_4i4mw")
+skeleton = NodePath("")

@@ -1,0 +1,319 @@
+[gd_scene load_steps=20 format=3 uid="uid://bnupu60e7uar3"]
+
+[ext_resource type="Script" path="res://resources/scripts/message_app/chat_application.gd" id="1_21gti"]
+[ext_resource type="Script" path="res://addons/TextureRectRounded/TextureRectRounded.gd" id="2_k7k3w"]
+[ext_resource type="Texture2D" uid="uid://d26sm6xnvr42s" path="res://assets/textures/backgrounds/ui_topbar_window.tres" id="3_l4l28"]
+[ext_resource type="Texture2D" uid="uid://d1sbkb30cycfj" path="res://assets/textures/icons/chat_app_icon_sao_os.png" id="4_mx5l7"]
+[ext_resource type="Texture2D" uid="uid://d1yrpm2lo2wnn" path="res://assets/textures/icons/remove.png" id="5_s7pm7"]
+[ext_resource type="Texture2D" uid="uid://dxr1r0of1y1tu" path="res://assets/textures/icons/arrow_forward.png" id="6_qwwcb"]
+[ext_resource type="StyleBox" uid="uid://t5kfrqcuukfh" path="res://resources/materials/input_text_lineedit.tres" id="7_6r05r"]
+[ext_resource type="PackedScene" uid="uid://ktm7k0co2o7l" path="res://addons/mqtt/mqtt.tscn" id="8_2exw2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6r4f"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+shadow_color = Color(0.8, 0.403922, 0.509804, 0.564706)
+shadow_size = 2
+
+[sub_resource type="Gradient" id="Gradient_ee253"]
+colors = PackedColorArray(0.694118, 0.556863, 0.6, 0.180392, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6iqn1"]
+gradient = SubResource("Gradient_ee253")
+fill_from = Vector2(0.458689, 0)
+fill_to = Vector2(0.481481, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50rxb"]
+draw_center = false
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+shadow_color = Color(0.545098, 0.156863, 0.156863, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7o4px"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_detail = 20
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dee2r"]
+bg_color = Color(0.929715, 0.929715, 0.929715, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0.843137, 0.180392, 0.333333, 0.6)
+shadow_size = 3
+
+[sub_resource type="SystemFont" id="SystemFont_q30d4"]
+font_names = PackedStringArray("Inter")
+font_weight = 100
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_xotft"]
+font = SubResource("SystemFont_q30d4")
+font_size = 12
+font_color = Color(0.314316, 0.314316, 0.314316, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7kem"]
+bg_color = Color(1, 1, 1, 0.835294)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgenn"]
+content_margin_left = 1.0
+bg_color = Color(0.34902, 0.6, 0.964706, 0.737255)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="SystemFont" id="SystemFont_46r0l"]
+font_names = PackedStringArray("Cantarell")
+font_weight = 100
+subpixel_positioning = 0
+
+[node name="ChatApplication" type="Control"]
+layout_mode = 3
+anchor_left = 0.498
+anchor_top = 0.5
+anchor_right = 0.498
+anchor_bottom = 0.5
+offset_left = -498.696
+offset_top = -241.0
+offset_right = 499.304
+offset_bottom = 273.0
+script = ExtResource("1_21gti")
+host = "192.168.1.6"
+topic = "redot/messages_another_client"
+sending_messages_topic = "redot/messages_my_client"
+
+[node name="MQTT" parent="." instance=ExtResource("8_2exw2")]
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013
+anchor_top = 0.049
+anchor_right = 0.984
+anchor_bottom = 0.704
+offset_left = 0.026
+offset_top = -0.186001
+offset_right = -0.0320435
+offset_bottom = 0.143982
+theme_override_styles/panel = SubResource("StyleBoxFlat_b6r4f")
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_6iqn1")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 10.0
+offset_right = -17.9999
+offset_bottom = -9.99994
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="MessagesContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TitleBar" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.049
+offset_bottom = -0.186001
+grow_horizontal = 2
+
+[node name="RoundedBar" type="Panel" parent="TitleBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.016
+anchor_right = 0.982
+anchor_bottom = 1.0
+offset_left = -2.968
+offset_right = 1.96393
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_50rxb")
+
+[node name="TextureRectRounded" type="Panel" parent="TitleBar/RoundedBar"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7o4px")
+script = ExtResource("2_k7k3w")
+corner_detail = 60
+radius_bottom_left = 0
+radius_bottom_right = 0
+radius_top_left = 10
+radius_top_right = 10
+texture = ExtResource("3_l4l28")
+
+[node name="ApplicationIconButton" type="Button" parent="TitleBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.006
+anchor_top = 0.24
+anchor_right = 0.022
+anchor_bottom = 0.84
+offset_left = 0.0120082
+offset_right = 0.0440083
+theme_override_colors/icon_normal_color = Color(0.878843, 0.729351, 0.839277, 1)
+theme_override_constants/icon_max_width = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_dee2r")
+icon = ExtResource("4_mx5l7")
+icon_alignment = 2
+expand_icon = true
+
+[node name="QuitButton" type="Button" parent="TitleBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.973
+anchor_top = 0.24
+anchor_right = 0.989
+anchor_bottom = 0.84
+offset_left = -0.0539551
+offset_right = -0.0219116
+theme_override_colors/icon_normal_color = Color(0.878843, 0.729351, 0.839277, 1)
+theme_override_constants/icon_max_width = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_dee2r")
+icon = ExtResource("5_s7pm7")
+icon_alignment = 1
+
+[node name="WindowTitleLabel" type="Label" parent="TitleBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48
+anchor_top = 0.04
+anchor_right = 0.52
+anchor_bottom = 0.96
+offset_left = -0.0400085
+offset_right = 0.039978
+grow_horizontal = 2
+grow_vertical = 2
+text = "リズ"
+label_settings = SubResource("LabelSettings_xotft")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextInputArea" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.302
+anchor_top = 0.759
+anchor_right = 0.711
+anchor_bottom = 0.842
+offset_left = 2.60403
+offset_top = -0.125977
+offset_right = 0.422058
+offset_bottom = 0.212006
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="TextInputArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c7kem")
+
+[node name="Send" type="Button" parent="TextInputArea/Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -17.5
+offset_right = -6.0
+offset_bottom = 17.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/icon_max_width = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_lgenn")
+text = "        "
+icon = ExtResource("6_qwwcb")
+icon_alignment = 1
+
+[node name="MessageInput_LineEdit" type="LineEdit" parent="TextInputArea/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.044
+anchor_top = 0.14
+anchor_right = 0.879
+anchor_bottom = 0.86
+offset_left = 0.135998
+offset_top = -0.02
+offset_right = 0.125977
+offset_bottom = 0.0200005
+theme_override_colors/selection_color = Color(0, 0, 0, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 0.690196)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0.690196)
+theme_override_colors/font_color = Color(0, 0, 0, 0.690196)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("SystemFont_46r0l")
+theme_override_styles/focus = ExtResource("7_6r05r")
+theme_override_styles/normal = ExtResource("7_6r05r")
+placeholder_text = "Write Here..."
+flat = true
+caret_blink = true
+
+[node name="nickname" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 473.0
+offset_right = 253.0
+offset_bottom = 504.0
+placeholder_text = "Nickname"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="connect_btn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.813
+anchor_top = 0.92
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.373901
+offset_top = 0.120056
+offset_right = 0.00012207
+offset_bottom = 6.10352e-05
+grow_horizontal = 0
+grow_vertical = 0
+text = "CONNECT"
+
+[connection signal="broker_connected" from="MQTT" to="." method="_on_mqtt_broker_connected"]
+[connection signal="broker_connection_failed" from="MQTT" to="." method="_on_mqtt_broker_connection_failed"]
+[connection signal="broker_disconnected" from="MQTT" to="." method="_on_mqtt_broker_disconnected"]
+[connection signal="pressed" from="TitleBar/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="text_submitted" from="TextInputArea/Panel/MessageInput_LineEdit" to="." method="_on_message_input_line_edit_text_submitted"]
+[connection signal="text_submitted" from="nickname" to="." method="_on_nickname_text_submitted"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="connect_btn" to="." method="_on_connect_btn_pressed"]

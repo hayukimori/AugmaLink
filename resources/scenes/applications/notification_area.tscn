@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3 uid="uid://byvlxl4otpxj0"]
+
+[ext_resource type="Texture2D" uid="uid://cne7xtgsdb0lr" path="res://assets/textures/logos/discord_white.png" id="1_1pdhd"]
+
+[sub_resource type="Theme" id="Theme_jgf5k"]
+
+[sub_resource type="SystemFont" id="SystemFont_20y8f"]
+font_names = PackedStringArray("Cantarell")
+font_weight = 350
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghlr5"]
+content_margin_top = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.82606, 0.82606, 0.82606, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.835294, 0.309804, 0.0588235, 0.25098)
+shadow_size = 5
+
+[sub_resource type="Gradient" id="Gradient_7vyla"]
+offsets = PackedFloat32Array(0.322674, 0.997093)
+colors = PackedColorArray(0.827451, 0.827451, 0.827451, 1, 0.827451, 0.827451, 0.827451, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_15omg"]
+gradient = SubResource("Gradient_7vyla")
+fill_from = Vector2(0, 0.350427)
+fill_to = Vector2(1, 0.299145)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dnbm5"]
+bg_color = Color(0.344884, 0.396185, 0.949187, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.835294, 0.309804, 0.0588235, 0.25098)
+
+[node name="NotificationArea" type="Control"]
+layout_mode = 3
+anchor_left = 0.747
+anchor_top = 0.113
+anchor_right = 1.0
+anchor_bottom = 0.426
+offset_left = -0.544067
+offset_top = -0.224007
+offset_bottom = -0.0480042
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.144
+anchor_top = 0.118
+anchor_right = 0.932
+anchor_bottom = 1.305
+offset_left = -0.0480194
+offset_top = 0.0459976
+offset_right = 1.8559
+offset_bottom = 0.085022
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_jgf5k")
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 0.807843)
+theme_override_fonts/font = SubResource("SystemFont_20y8f")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_ghlr5")
+text = "Bo jogar uma batatinha frita 123, vai ganhar prêmio"
+text_overrun_behavior = 4
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Button"]
+layout_mode = 0
+offset_left = 0.00012207
+offset_top = 13.0
+offset_right = 33.0001
+offset_bottom = 37.0
+texture = SubResource("GradientTexture2D_15omg")
+expand_mode = 1
+
+[node name="Icon" type="Button" parent="VBoxContainer/Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.06
+anchor_top = 0.222
+anchor_right = 0.065
+anchor_bottom = 0.812
+offset_left = -0.0798779
+offset_top = 0.0100107
+offset_right = -0.0798788
+offset_bottom = -0.28899
+theme_override_constants/icon_max_width = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_dnbm5")
+icon = ExtResource("1_1pdhd")
+icon_alignment = 1

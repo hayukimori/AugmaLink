@@ -1,0 +1,111 @@
+[gd_scene load_steps=5 format=3 uid="uid://2dl36py6jr8t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mwv6"]
+bg_color = Color(1, 1, 1, 1)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kky7"]
+bg_color = Color(1, 1, 1, 1)
+skew = Vector2(0.4, 0)
+shadow_color = Color(0, 0, 0, 0.25098)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd517"]
+skew = Vector2(0.4, 0)
+shadow_color = Color(0, 0, 0, 0.25098)
+shadow_size = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_eqrsa"]
+font_size = 40
+
+[node name="system_message_popup" type="Control"]
+layout_mode = 3
+anchor_left = 0.167
+anchor_top = 0.167
+anchor_right = 0.833
+anchor_bottom = 0.833
+offset_left = -0.384018
+offset_top = -0.216003
+offset_right = 0.383911
+offset_bottom = 0.215942
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Guide" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.141
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.0879974
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5mwv6")
+
+[node name="close_button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -28.0
+offset_top = 26.0
+offset_right = 30.0
+offset_bottom = 81.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_4kky7")
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -126.0
+offset_top = -54.0
+offset_right = 134.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_rd517")
+
+[node name="HSeparator" type="HSeparator" parent="Panel"]
+layout_mode = 0
+offset_left = 103.0
+offset_right = 654.0
+offset_bottom = 118.0
+
+[node name="HSeparator2" type="HSeparator" parent="Panel"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 232.0
+offset_right = 654.0
+offset_bottom = 350.0
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 42.0
+offset_bottom = 61.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -18.0
+offset_bottom = 50.0
+grow_horizontal = 2
+text = "Message"
+label_settings = SubResource("LabelSettings_eqrsa")
+vertical_alignment = 1

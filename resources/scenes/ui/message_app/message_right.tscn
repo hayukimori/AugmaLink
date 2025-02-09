@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvv6lylb0bfaj"]
+
+[ext_resource type="Script" path="res://resources/scripts/message_app/message_left.gd" id="1_y3mkc"]
+
+[sub_resource type="SystemFont" id="SystemFont_ctqud"]
+font_names = PackedStringArray("Cantarell")
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htxvl"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.994108, 0.994108, 0.994108, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.65098, 0.282353, 0.333333, 0.6)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcmgp"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0.65098, 0.282353, 0.333333, 0.6)
+shadow_size = 5
+
+[node name="MessageRight" type="Label"]
+custom_minimum_size = Vector2(300, 45)
+offset_right = 300.0
+offset_bottom = 45.0
+size_flags_horizontal = 8
+script = ExtResource("1_y3mkc")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+anchor_left = 0.143
+anchor_right = 0.977
+offset_left = -38.9
+offset_top = 7.0
+offset_right = -39.1
+offset_bottom = 33.0
+theme_override_colors/font_color = Color(0.364084, 0.364084, 0.364084, 1)
+theme_override_fonts/font = SubResource("SystemFont_ctqud")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_htxvl")
+text = "Just a test message :)"
+autowrap_mode = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+offset_left = 265.0
+offset_top = 8.0
+offset_right = 296.0
+offset_bottom = 34.0
+mouse_filter = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_tcmgp")

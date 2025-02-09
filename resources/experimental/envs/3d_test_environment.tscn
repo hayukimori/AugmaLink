@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://7fuo82cliy7d"]
+
+[ext_resource type="Script" path="res://resources/experimental/envs/3d_test_environment.gd" id="1_y1xw8"]
+[ext_resource type="Script" path="res://resources/experimental/envs/area_3d.gd" id="2_7mkyk"]
+[ext_resource type="PackedScene" uid="uid://cbnbvr3o76psi" path="res://resources/scenes/ui/auguma_UI.tscn" id="2_8pysw"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_6nfjp"]
+size = Vector2(2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lvxa5"]
+size = Vector3(2, 1, 0.01)
+
+[node name="3DTestEnvironment" type="Node3D"]
+script = ExtResource("1_y1xw8")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+
+[node name="Control" parent="SubViewport" instance=ExtResource("2_8pysw")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_6nfjp")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("2_7mkyk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_lvxa5")

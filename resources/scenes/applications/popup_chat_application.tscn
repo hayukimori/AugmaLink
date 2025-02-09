@@ -1,0 +1,220 @@
+[gd_scene load_steps=14 format=3 uid="uid://b7hakb3qpplob"]
+
+[ext_resource type="Theme" uid="uid://dyklf7egm08qm" path="res://resources/themes/basic_theme.tres" id="1_7r2ik"]
+[ext_resource type="Script" path="res://resources/scripts/message_app/popup_chat_application.gd" id="1_akxes"]
+[ext_resource type="Texture2D" uid="uid://d1sbkb30cycfj" path="res://assets/textures/icons/chat_app_icon_sao_os.png" id="2_kb0l7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i30x7"]
+font_size = 12
+font_color = Color(0, 0, 0, 0.631373)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1lra"]
+bg_color = Color(0.972641, 0.921828, 0.968734, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hfoaw"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.25098)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5xq40"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.25098)
+shadow_size = 2
+
+[sub_resource type="SystemFont" id="SystemFont_1i4p1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1qbbm"]
+font = SubResource("SystemFont_1i4p1")
+font_size = 10
+font_color = Color(0, 0, 0, 0.486275)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_jluw8"]
+font = SubResource("SystemFont_1i4p1")
+font_size = 11
+font_color = Color(0, 0, 0, 0.45098)
+shadow_size = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qswq6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nky3b"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+shadow_color = Color(0, 0, 0, 0.25098)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iacxi"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 0.25098)
+shadow_size = 2
+
+[node name="popup_chat_application" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -45.0
+offset_right = 204.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_akxes")
+
+[node name="base_panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7r2ik")
+
+[node name="message_label" type="Label" parent="base_panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -11.5
+offset_right = -33.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Some random text"
+label_settings = SubResource("LabelSettings_i30x7")
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="top_side" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 37.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o1lra")
+
+[node name="app_icon_button" type="Button" parent="top_side"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.04
+anchor_top = 0.432
+anchor_right = 0.034
+anchor_bottom = 1.238
+offset_left = -0.079998
+offset_top = 0.0159998
+offset_right = -0.0820007
+offset_bottom = -0.806
+theme_override_colors/icon_normal_color = Color(0.878843, 0.729351, 0.839277, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_hfoaw")
+icon = ExtResource("2_kb0l7")
+icon_alignment = 1
+expand_icon = true
+
+[node name="user_profile_picture" type="Button" parent="top_side"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = -0.676
+anchor_right = 0.196
+anchor_bottom = 0.649
+offset_left = -0.0680008
+offset_top = 0.0120029
+offset_right = -0.184006
+offset_bottom = -0.0130024
+theme_override_styles/focus = SubResource("StyleBoxFlat_5xq40")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5xq40")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5xq40")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5xq40")
+expand_icon = true
+
+[node name="username_label" type="Label" parent="top_side"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.238
+anchor_right = 0.895
+anchor_bottom = 1.0
+offset_left = -0.152
+offset_top = 1.0
+offset_right = 1.41998
+offset_bottom = 1.0
+text = "username"
+label_settings = SubResource("LabelSettings_1qbbm")
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="timestamp_label" type="Label" parent="top_side"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -11.5
+offset_right = -18.0
+offset_bottom = 17.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "now"
+label_settings = SubResource("LabelSettings_jluw8")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+uppercase = true
+
+[node name="buttons_side" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = 14.0
+offset_right = 17.0
+offset_bottom = -13.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qswq6")
+
+[node name="quit_button" type="Button" parent="buttons_side"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.028
+anchor_bottom = 0.519
+offset_left = -1.0
+offset_right = -0.00799942
+offset_bottom = -1.25401
+theme_override_styles/normal = SubResource("StyleBoxFlat_nky3b")
+
+[node name="open_button" type="Button" parent="buttons_side"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.025
+anchor_bottom = 1.015
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 0.0999985
+offset_bottom = 0.00999451
+theme_override_styles/normal = SubResource("StyleBoxFlat_iacxi")

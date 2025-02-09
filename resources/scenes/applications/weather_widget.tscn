@@ -1,0 +1,136 @@
+[gd_scene load_steps=10 format=3 uid="uid://b1hr7rkfujath"]
+
+[ext_resource type="Texture2D" uid="uid://578jvtkc0cq" path="res://assets/textures/icons/partly_cloidy_day.png" id="1_ob0q8"]
+[ext_resource type="Script" path="res://resources/scripts/weather_widget/weather_manager.gd" id="2_p2ffb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gsbk7"]
+bg_color = Color(0.980392, 0.611765, 0.105882, 0.658824)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onpmd"]
+bg_color = Color(0, 0, 0, 0.286275)
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+
+[sub_resource type="SystemFont" id="SystemFont_ug080"]
+font_names = PackedStringArray("Cantarell")
+hinting = 2
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_bpvax"]
+font = SubResource("SystemFont_ug080")
+font_size = 28
+font_color = Color(1, 1, 1, 0.764706)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8p78"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0.764706)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="SystemFont" id="SystemFont_bbx2f"]
+font_names = PackedStringArray("Cantarell")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_2pwmh"]
+font = SubResource("SystemFont_bbx2f")
+font_size = 12
+font_color = Color(1, 1, 1, 0.764706)
+
+[node name="WeatherWidget" type="Control" groups=["widgets"]]
+layout_mode = 3
+anchor_left = 0.03
+anchor_top = 0.179
+anchor_right = 0.03
+anchor_bottom = 0.179
+offset_left = 0.439999
+offset_top = 0.00799561
+offset_right = 222.44
+offset_bottom = 98.008
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gsbk7")
+
+[node name="Panel" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -84.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_onpmd")
+
+[node name="Label" type="Label" parent="Panel/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.339
+anchor_right = 1.012
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -5.527
+offset_right = 4.992
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "23º"
+label_settings = SubResource("LabelSettings_bpvax")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.103
+anchor_right = 1.0
+anchor_bottom = 0.379
+offset_left = 9.0
+offset_top = 5.421
+offset_right = -9.0
+offset_bottom = -2.49099
+theme_override_styles/normal = SubResource("StyleBoxFlat_y8p78")
+text = "Brasília"
+label_settings = SubResource("LabelSettings_2pwmh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+modulate = Color(1, 1, 1, 0.764706)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.126
+anchor_top = 0.194
+anchor_right = 0.458
+anchor_bottom = 0.817
+offset_left = 0.0360031
+offset_top = -0.0419998
+offset_right = -0.0120087
+offset_bottom = 0.0189972
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ob0q8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WeatherManager" type="Node" parent="."]
+script = ExtResource("2_p2ffb")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="WeatherManager"]
+
+[connection signal="request_completed" from="WeatherManager/HTTPRequest" to="WeatherManager" method="_on_http_request_request_completed"]

@@ -1,0 +1,226 @@
+[gd_scene load_steps=16 format=3 uid="uid://cbnbvr3o76psi"]
+
+[ext_resource type="Script" path="res://resources/scripts/AugmaController.gd" id="1_2gbip"]
+[ext_resource type="Texture2D" uid="uid://co754gdx7hgcd" path="res://assets/textures/UI_items/SAO_OS_BOTTOMLAYER.png" id="1_5up7x"]
+[ext_resource type="Texture2D" uid="uid://ev4picqliu21" path="res://assets/textures/UI_items/SAO_OS_TOPBAR.png" id="2_mcql3"]
+[ext_resource type="Theme" uid="uid://b2nxumv02mw5p" path="res://resources/themes/main_ui_bottom.tres" id="3_5ngws"]
+[ext_resource type="Texture2D" uid="uid://d1sbkb30cycfj" path="res://assets/textures/icons/chat_app_icon_sao_os.png" id="3_tgboo"]
+[ext_resource type="Texture2D" uid="uid://cacsb6k4q6bdt" path="res://assets/textures/icons/mic.png" id="4_4uvfp"]
+[ext_resource type="Texture2D" uid="uid://birln63ob5bw5" path="res://assets/textures/icons/map_icon_sao_os.png" id="4_m6ksy"]
+[ext_resource type="Texture2D" uid="uid://7xa2edn40kk5" path="res://assets/textures/icons/music_player_icon_sao_os.png" id="5_mvl0g"]
+[ext_resource type="Texture2D" uid="uid://pm7gqd7b5lcr" path="res://assets/textures/icons/ellipsis2.png" id="5_xvdfq"]
+[ext_resource type="Script" path="res://resources/scripts/application_button.gd" id="6_vstry"]
+[ext_resource type="Theme" uid="uid://efo0xhacbk1b" path="res://resources/themes/main_ui_theme.tres" id="8_8va7w"]
+[ext_resource type="PackedScene" uid="uid://b1hr7rkfujath" path="res://resources/scenes/applications/weather_widget.tscn" id="12_wey2v"]
+[ext_resource type="PackedScene" uid="uid://byvlxl4otpxj0" path="res://resources/scenes/applications/notification_area.tscn" id="13_xcf7u"]
+
+[sub_resource type="SystemFont" id="SystemFont_r3ts8"]
+font_names = PackedStringArray("Cantarell")
+font_weight = 150
+subpixel_positioning = 0
+msdf_pixel_range = 20
+msdf_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_y36t5"]
+font = SubResource("SystemFont_r3ts8")
+
+[node name="Control" type="Control" groups=["global_controller"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2gbip")
+
+[node name="UIBasic" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="UIBasic"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = 450.0
+offset_right = 250.0
+offset_bottom = 609.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_5up7x")
+stretch_mode = 5
+
+[node name="ApplicationsBottomMenu" type="Control" parent="UIBasic/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -82.0
+offset_right = 202.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Chat" type="Button" parent="UIBasic/TextureRect/ApplicationsBottomMenu" groups=["interactive"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.204
+anchor_top = 0.225
+anchor_right = 0.303
+anchor_bottom = 0.712
+offset_left = -0.00801086
+offset_top = -1.0
+offset_right = 0.194
+offset_bottom = 0.0400009
+theme = ExtResource("3_5ngws")
+theme_override_constants/icon_max_width = 32
+icon = ExtResource("3_tgboo")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("6_vstry")
+exec = "res://resources/scenes/applications/chat_application.tscn"
+application_name = "Chat Application"
+flags = Array[String](["HIDEWIDGETS"])
+
+[node name="Button2" type="Button" parent="UIBasic/TextureRect/ApplicationsBottomMenu" groups=["interactive"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.361
+anchor_top = 0.15
+anchor_right = 0.46
+anchor_bottom = 0.65
+offset_left = -0.122009
+offset_right = 0.0800018
+theme = ExtResource("3_5ngws")
+icon = ExtResource("4_m6ksy")
+icon_alignment = 1
+expand_icon = true
+
+[node name="MusicPlayer" type="Button" parent="UIBasic/TextureRect/ApplicationsBottomMenu" groups=["interactive"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.535
+anchor_top = 0.15
+anchor_right = 0.634
+anchor_bottom = 0.65
+offset_left = -0.0700073
+offset_right = 0.132004
+theme = ExtResource("3_5ngws")
+icon = ExtResource("5_mvl0g")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("6_vstry")
+exec = "res://resources/scenes/applications/music_player.tscn"
+application_name = "Music Player"
+
+[node name="Button4" type="Button" parent="UIBasic/TextureRect/ApplicationsBottomMenu" groups=["interactive"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.687
+anchor_top = 0.212
+anchor_right = 0.786
+anchor_bottom = 0.712
+offset_left = -0.174011
+offset_top = 0.039999
+offset_right = 0.0279846
+offset_bottom = 0.0400009
+theme = ExtResource("3_5ngws")
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect2" type="TextureRect" parent="UIBasic"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -614.0
+offset_right = 615.0
+offset_bottom = 400.0
+grow_horizontal = 2
+texture = ExtResource("2_mcql3")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UIBasic/TextureRect2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.5
+offset_top = 32.0
+offset_right = 91.5
+offset_bottom = 71.0
+grow_horizontal = 2
+text = "01:15"
+label_settings = SubResource("LabelSettings_y36t5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TopOptions" type="Control" parent="UIBasic/TextureRect2"]
+layout_mode = 1
+anchor_left = 0.03
+anchor_right = 0.966
+offset_left = -1.87
+offset_right = 6.78601
+offset_bottom = 59.0
+grow_horizontal = 2
+
+[node name="Button" type="Button" parent="UIBasic/TextureRect2/TopOptions" groups=["interactive"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.017
+anchor_top = 0.31
+anchor_right = 0.045
+anchor_bottom = 0.862
+offset_left = 0.415998
+offset_top = 0.0200005
+offset_right = 0.159996
+offset_bottom = 0.0039978
+theme = ExtResource("8_8va7w")
+icon = ExtResource("4_4uvfp")
+icon_alignment = 1
+
+[node name="Button2" type="Button" parent="UIBasic/TextureRect2/TopOptions" groups=["interactive"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.017
+anchor_top = 0.31
+anchor_right = 0.045
+anchor_bottom = 0.862
+offset_left = 1089.42
+offset_top = 0.0200005
+offset_right = 1089.16
+offset_bottom = 0.0039978
+theme = ExtResource("8_8va7w")
+theme_override_constants/icon_max_width = 20
+icon = ExtResource("5_xvdfq")
+icon_alignment = 1
+
+[node name="WeatherWidget" parent="." instance=ExtResource("12_wey2v")]
+layout_mode = 1
+
+[node name="NotificationArea" parent="." instance=ExtResource("13_xcf7u")]
+layout_mode = 1
+
+[node name="ApplicationOnTop" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="."]

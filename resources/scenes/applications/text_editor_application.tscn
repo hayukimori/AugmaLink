@@ -1,0 +1,203 @@
+[gd_scene load_steps=16 format=3 uid="uid://dnwvavi587vsk"]
+
+[ext_resource type="Script" path="res://addons/TextureRectRounded/TextureRectRounded.gd" id="1_xq20y"]
+[ext_resource type="Texture2D" uid="uid://d1sbkb30cycfj" path="res://assets/textures/icons/chat_app_icon_sao_os.png" id="3_wksf4"]
+[ext_resource type="Texture2D" uid="uid://d1yrpm2lo2wnn" path="res://assets/textures/icons/remove.png" id="4_7pdg0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_14ed0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+shadow_color = Color(0.623529, 0.870588, 0.537255, 0.913725)
+shadow_size = 2
+
+[sub_resource type="Gradient" id="Gradient_f0swk"]
+colors = PackedColorArray(0.694118, 0.556863, 0.6, 0.180392, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uudly"]
+gradient = SubResource("Gradient_f0swk")
+fill_from = Vector2(0.458689, 0)
+fill_to = Vector2(0.481481, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_365ai"]
+font_names = PackedStringArray("Cantarell")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ln7xd"]
+draw_center = false
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+shadow_color = Color(0.545098, 0.156863, 0.156863, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6c03"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_detail = 20
+anti_aliasing = false
+
+[sub_resource type="Gradient" id="Gradient_ykn0r"]
+offsets = PackedFloat32Array(0, 0.273504, 0.358974, 1)
+colors = PackedColorArray(0.623529, 0.870588, 0.537255, 0.913725, 0.753179, 0.928314, 0.784484, 0.898039, 0.74389, 0.924179, 0.767151, 0.899146, 0.621578, 0.869734, 0.538931, 0.913725)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x3qg2"]
+gradient = SubResource("Gradient_ykn0r")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4klcl"]
+bg_color = Color(0.929715, 0.929715, 0.929715, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0.381466, 0.528391, 0.317041, 0.6)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sscu"]
+bg_color = Color(0.929715, 0.929715, 0.929715, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0.447053, 0.507481, 0.334837, 0.6)
+shadow_size = 3
+
+[sub_resource type="SystemFont" id="SystemFont_rx6w6"]
+font_names = PackedStringArray("Inter")
+font_weight = 100
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_vxdbm"]
+font = SubResource("SystemFont_rx6w6")
+font_size = 12
+font_color = Color(0.314316, 0.314316, 0.314316, 1)
+
+[node name="text_editor_application" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.0
+offset_top = -229.0
+offset_right = 384.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013
+anchor_top = 0.049
+anchor_right = 0.984
+anchor_bottom = 1.0
+offset_left = 0.0679998
+offset_top = 0.244001
+offset_right = 0.223999
+offset_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_14ed0")
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_uudly")
+
+[node name="TextEdit" type="TextEdit" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_365ai")
+theme_override_font_sizes/font_size = 12
+wrap_mode = 1
+scroll_smooth = true
+minimap_draw = true
+minimap_width = 60
+caret_blink = true
+
+[node name="TitleBar" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.049
+offset_bottom = -0.186001
+grow_horizontal = 2
+
+[node name="RoundedBar" type="Panel" parent="TitleBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.016
+anchor_right = 0.982
+anchor_bottom = 1.0
+offset_left = -2.968
+offset_right = 1.96393
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ln7xd")
+
+[node name="TextureRectRounded" type="Panel" parent="TitleBar/RoundedBar"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d6c03")
+script = ExtResource("1_xq20y")
+corner_detail = 60
+radius_bottom_left = 0
+radius_bottom_right = 0
+radius_top_left = 10
+radius_top_right = 10
+texture = SubResource("GradientTexture2D_x3qg2")
+
+[node name="ApplicationIconButton" type="Button" parent="TitleBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.006
+anchor_top = 0.24
+anchor_right = 0.022
+anchor_bottom = 0.84
+offset_left = 0.0120082
+offset_right = 0.0440083
+theme_override_colors/icon_normal_color = Color(0.878843, 0.729351, 0.839277, 1)
+theme_override_constants/icon_max_width = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_4klcl")
+icon = ExtResource("3_wksf4")
+icon_alignment = 2
+expand_icon = true
+
+[node name="QuitButton" type="Button" parent="TitleBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.973
+anchor_top = 0.24
+anchor_right = 0.989
+anchor_bottom = 0.84
+offset_left = -0.0539551
+offset_right = -0.0219116
+theme_override_colors/icon_normal_color = Color(0.878843, 0.729351, 0.839277, 1)
+theme_override_constants/icon_max_width = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_6sscu")
+icon = ExtResource("4_7pdg0")
+icon_alignment = 1
+
+[node name="WindowTitleLabel" type="Label" parent="TitleBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48
+anchor_top = 0.04
+anchor_right = 0.52
+anchor_bottom = 0.96
+offset_left = -0.0400085
+offset_right = 0.039978
+grow_horizontal = 2
+grow_vertical = 2
+text = "Text editor"
+label_settings = SubResource("LabelSettings_vxdbm")
+horizontal_alignment = 1
+vertical_alignment = 1
