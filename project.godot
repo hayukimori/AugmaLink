@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Augma Launcher"
+config/name="Augma Link"
 run/main_scene="res://resources/scenes/main/world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/image="res://augma_icon.png"
+boot_splash/fullsize=false
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=2000
 
 [autoload]
 
