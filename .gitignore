@@ -1,3 +1,5 @@
 # Redot 4+ specific ignores
 .godot/
 /android/
+**/*.import
+*.import
