@@ -1,12 +1,18 @@
 extends Control
 
+enum WEngine {OpenMeteo}
+@export_category("Weather Application")
+@export var weather_engine: WEngine # Will not be used by now, but in the future it will be used
+
+
 @onready var current_degrees_label: Label = $BackPanel/CurrentDayPanel/CurrentDegreesLabel
 @onready var maximum_degrees_label: Label = $BackPanel/CurrentDayPanel/MaximumDegreesLabel
 @onready var minimum_degrees_label: Label = $BackPanel/CurrentDayPanel/MinimumDegreesLabel
 
-
-
 @onready var horizontal_line_space: Control = $BackPanel/LeftContainers/horizontal_line_space
+@onready var http_request: HTTPRequest = $HTTPRequest
+
+@export_category("Visual")
 @export var _2d_line_y: float = 0.0
 
 var timezone: String = ""
@@ -24,6 +30,9 @@ func read_json_file(file_path: String, dict_format: bool = false):
 func fake_response() -> Dictionary:
 	return read_json_file("res:///resources/api_fake_responses/open_meteo_brasilia.json", true)
 
+
+func _api_call(url):
+	return
 
 func get_data() -> void:
 	var response: Dictionary = fake_response()
