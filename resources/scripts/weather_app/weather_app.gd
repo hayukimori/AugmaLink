@@ -89,7 +89,7 @@ func get_data(custom_response: Dictionary) -> void:
 		var current_date_string: String = "%d-%02d-%02d" % \
 		[current_date.year, current_date.month, current_date.day]
 		
-		new_baselines(temp[0], temp[1])
+		create_baselines(temp[0], temp[1])
 		#draw_baselines(temp[0], temp[1])
 		set_min_max_dg(temp[1], current_date_string, maximum_degrees_label, minimum_degrees_label)
 		_instantiate_panels(temp[1])
@@ -105,7 +105,7 @@ func set_min_max_dg(simple_data: Dictionary, date_string: String, label_max: Lab
 	label_min.text = "%d ºC" % int(mi_dg)
 
 
-func new_baselines(data: Dictionary, simple_data: Dictionary):
+func create_baselines(data: Dictionary, simple_data: Dictionary):
 	var current_datetime: Dictionary = Time.get_date_dict_from_system()
 	var date_string = "%d-%02d-%02d" % [current_datetime.year, current_datetime.month, current_datetime.day]
 	
@@ -126,46 +126,6 @@ func new_baselines(data: Dictionary, simple_data: Dictionary):
 		current_bar.value = _lp
 		
 		bars_container.add_child(current_bar)
-		
-
-
-func draw_baselines(data: Dictionary, simple_data: Dictionary):
-	var current_datetime: Dictionary = Time.get_date_dict_from_system()
-	var date_string = "%d-%02d-%02d" % [current_datetime.year, current_datetime.month, current_datetime.day]
-	
-	var date_data = data.get(date_string)
-	var date_simple_data = simple_data.get(date_string)
-	
-	var min_dg = date_simple_data["minimum"]
-	var max_dg = date_simple_data["maximum"]
-	
-	var sbp = horizontal_line_space.size.x / len(date_data) 
-	
-	var last_point_data = Vector2.ZERO
-	
-	var line: Line2D = Line2D.new()
-	line.joint_mode = Line2D.LINE_JOINT_BEVEL
-	line.width = 2
-	line.antialiased = true
-	line.default_color = Color.hex(0x9fe5eeb0)
-	horizontal_line_space.add_child(line)
-	
-	for item in date_data:
-		var _lp = ((date_data[item] - min_dg)/(max_dg - min_dg)) * horizontal_line_space.size.y
-		
-		var point_x = last_point_data.x + sbp
-		var current_point = Vector2(last_point_data.x + sbp, (horizontal_line_space.size.y + 10) + (_lp * -1))
-		
-		
-		var nlabel = Label.new()
-		nlabel.text = "%sh" % item.split("T")[1].split(":")[0]
-		nlabel.position = Vector2(point_x, 200)
-		nlabel.scale = Vector2(0.5, 0.5)
-		horizontal_line_space.add_child(nlabel)
-		
-		line.add_point(current_point)
-		
-		last_point_data = current_point
 
 
 func process_listed_weather(rearranged_list:Array[Dictionary], ret_method: int = 0):
