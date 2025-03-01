@@ -1,41 +1,70 @@
 extends Control
 
+
+
 enum WEngine {OpenMeteo}
+
+@export_category("Application Flags")
+
+
 @export_category("Weather Application")
 @export var weather_engine: WEngine # Will not be used by now, but in the future it will be used
+@export_file var sample_json
+@export var sample_url: String
+@export var load_fake_response: bool
 
 
 @onready var current_degrees_label: Label = $BackPanel/CurrentDayPanel/CurrentDegreesLabel
 @onready var maximum_degrees_label: Label = $BackPanel/CurrentDayPanel/MaximumDegreesLabel
 @onready var minimum_degrees_label: Label = $BackPanel/CurrentDayPanel/MinimumDegreesLabel
+@onready var sprite_animations: AnimationPlayer = $SpriteAnimations
+@onready var sprite_2d: Sprite2D = $BackPanel/LeftContainers/Sprite2D
+
 
 @onready var horizontal_line_space: Control = $BackPanel/LeftContainers/horizontal_line_space
 @onready var http_request: HTTPRequest = $HTTPRequest
 
+
 @export_category("Visual")
 @export var _2d_line_y: float = 0.0
+
 
 var timezone: String = ""
 var timeformat: String = "iso8601"
 var temperature_unit: String = "ºC"
 
 
+func _ready():
+	sprite_2d.visible = true
+	sprite_animations.play("loading")
+	
+	http_request.request_completed.connect(_api_rp_complete)
+	
+	await get_tree().process_frame
+	
+	if load_fake_response != true:
+		http_request.request(sample_url)
+	else:
+		get_data(fake_response())
+
 func read_json_file(file_path: String, dict_format: bool = false):
 	var json_as_txt = FileAccess.get_file_as_string(file_path)
 	var json_as_dict = JSON.parse_string(json_as_txt)
-	
-	return json_as_dict if dict_format else json_as_txt
 
+	return json_as_dict if dict_format else json_as_txt
+	
 
 func fake_response() -> Dictionary:
-	return read_json_file("res:///resources/api_fake_responses/open_meteo_brasilia.json", true)
+	return read_json_file(sample_json, true)
 
 
-func _api_call(url):
-	return
+func get_data(custom_response: Dictionary) -> void:
+	
+	if sprite_animations.is_playing():
+		sprite_animations.stop()
+		sprite_2d.visible = false
 
-func get_data() -> void:
-	var response: Dictionary = fake_response()
+	var response = custom_response
 	var timestamps = response["hourly"]["time"]
 	var temperatures = response["hourly"]["temperature_2m"]
 	
@@ -67,6 +96,7 @@ func get_data() -> void:
 		draw_baselines(temp[0])
 		set_min_max_dg(temp[1], current_date_string, maximum_degrees_label, minimum_degrees_label)
 		_instantiate_panels(temp[1])
+
 
 func set_min_max_dg(simple_data: Dictionary, date_string: String, label_max: Label, label_min: Label):
 	var date_data = simple_data.get(date_string)
@@ -163,7 +193,8 @@ func process_listed_weather(rearranged_list:Array[Dictionary], ret_method: int =
 
 
 func _on_reload_data_pressed() -> void:
-	get_data()
+	#get_data()
+	http_request.request(sample_url)
 
 func _instantiate_panels(simple_data: Dictionary):
 	var bpd: PackedScene = load("res:///resources/scenes/ui/weather_app/basic_panel_day.tscn")
@@ -178,3 +209,19 @@ func _instantiate_panels(simple_data: Dictionary):
 		
 		z.add_child(current_panel)
 		current_panel.update_dg(temperature_unit)
+
+
+func _api_rp_complete(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray):
+	if result == HTTPRequest.RESULT_SUCCESS:
+		if response_code == 200:
+			var response = body.get_string_from_utf8()
+			var response_as_dict = JSON.parse_string(response)
+			get_data(response_as_dict)
+		else:
+			print("Error. Code: ", response_code)
+	else:
+		print("Fail. Rest: ", result)
+
+
+func _on_quit_btn_pressed() -> void:
+	queue_free()
