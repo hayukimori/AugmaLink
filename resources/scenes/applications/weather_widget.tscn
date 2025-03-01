@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b1hr7rkfujath"]
 
-[ext_resource type="Texture2D" uid="uid://578jvtkc0cq" path="res://assets/textures/icons/partly_cloidy_day.png" id="1_ob0q8"]
+[ext_resource type="Texture2D" uid="uid://cyi30aox42fv1" path="res://assets/textures/icons/partly_cloidy_day.png" id="1_ob0q8"]
 [ext_resource type="Script" path="res://resources/scripts/weather_widget/weather_manager.gd" id="2_p2ffb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gsbk7"]

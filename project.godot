@@ -52,6 +52,10 @@ folder_colors={
 current_top_app=""
 global_controller=""
 
+[gui]
+
+theme/default_font_antialiasing=2
+
 [rendering]
 
 renderer/rendering_method="mobile"

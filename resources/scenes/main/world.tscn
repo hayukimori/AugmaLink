@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dj4qfl3we66fr"]
 
-[ext_resource type="Texture2D" uid="uid://bdw2j5kejiegc" path="res://assets/textures/grids/Dark/texture_01.png" id="1_0n8st"]
+[ext_resource type="Texture2D" uid="uid://day8t826e68pm" path="res://assets/textures/grids/Dark/texture_01.png" id="1_0n8st"]
 [ext_resource type="Script" path="res://resources/scenes/main/world.gd" id="1_17slo"]
 [ext_resource type="Script" path="res://resources/scripts/camera/android_camera.gd" id="2_vpp10"]
 [ext_resource type="PackedScene" uid="uid://cbnbvr3o76psi" path="res://resources/scenes/ui/augma_UI.tscn" id="4_snjl1"]

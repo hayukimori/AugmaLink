@@ -1,0 +1,140 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhj3u176m8m7f"]
+
+[ext_resource type="Script" path="res://resources/scripts/weather_app/weather_app.gd" id="1_0ya63"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chsr8"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvbm1"]
+bg_color = Color(1, 0.337627, 0.552329, 0.690196)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="WeatherApp" type="Control"]
+layout_mode = 3
+anchor_left = 0.118
+anchor_top = 0.185
+anchor_right = 0.882
+anchor_bottom = 0.802
+offset_left = 0.0640106
+offset_top = 0.119995
+offset_right = -0.0640259
+offset_bottom = 0.303894
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ya63")
+_2d_line_y = 50.0
+
+[node name="BackPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_chsr8")
+
+[node name="LeftContainers" type="Control" parent="BackPanel"]
+layout_mode = 1
+anchor_left = 0.369
+anchor_top = 0.043
+anchor_right = 0.957
+anchor_bottom = 0.945
+offset_left = -294.72
+offset_top = -0.199999
+offset_right = -0.160034
+offset_bottom = 6.10352e-05
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="horizontal_line_space" type="Control" parent="BackPanel/LeftContainers"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.0
+offset_top = 14.0
+offset_right = 391.0
+offset_bottom = 203.0
+grow_horizontal = 2
+
+[node name="BaseContainers" type="Control" parent="BackPanel/LeftContainers"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -406.0
+offset_top = -89.0
+offset_right = 406.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BackPanel/LeftContainers/BaseContainers"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.101
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.0109997
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CurrentDayPanel" type="Panel" parent="BackPanel"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 17.0
+offset_right = 282.0
+offset_bottom = 260.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rvbm1")
+
+[node name="CurrentDegreesLabel" type="Label" parent="BackPanel/CurrentDayPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.596
+anchor_right = 0.5
+anchor_bottom = 0.596
+offset_left = -126.0
+offset_top = -144.828
+offset_right = 126.0
+offset_bottom = 0.171997
+grow_horizontal = 2
+grow_vertical = 2
+text = "00ºC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaximumDegreesLabel" type="Label" parent="BackPanel/CurrentDayPanel"]
+layout_mode = 0
+offset_top = 145.0
+offset_right = 119.0
+offset_bottom = 243.0
+text = "30ºC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MinimumDegreesLabel" type="Label" parent="BackPanel/CurrentDayPanel"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 145.0
+offset_right = 252.0
+offset_bottom = 243.0
+text = "30ºC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="reload_data" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "RELOAD DATA"
+
+[connection signal="pressed" from="reload_data" to="." method="_on_reload_data_pressed"]

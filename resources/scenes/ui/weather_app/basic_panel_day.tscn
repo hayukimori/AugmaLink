@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwjf27pv2q6bk"]
+
+[ext_resource type="Script" path="res://resources/scripts/weather_app/basic_panel_day.gd" id="1_62qnk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lly52"]
+bg_color = Color(1, 0.781294, 0.826569, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="BasicPanelDay" type="Panel"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -83.0
+offset_right = 119.0
+offset_bottom = -4.0
+grow_vertical = 0
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lly52")
+script = ExtResource("1_62qnk")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 53.0
+offset_right = 112.0
+offset_bottom = 76.0
+text = "XXºC"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 53.0
+offset_right = 49.0
+offset_bottom = 76.0
+text = "XXºC"
