@@ -100,20 +100,19 @@ _data = {
 
 [node name="WeatherApp" type="Control"]
 layout_mode = 3
-anchor_left = 0.118
+anchor_left = 0.5
 anchor_top = 0.185
-anchor_right = 0.882
-anchor_bottom = 0.802
-offset_left = 0.0640106
+anchor_right = 0.5
+anchor_bottom = 0.185
+offset_left = -440.0
 offset_top = 0.119995
-offset_right = -0.0640259
-offset_bottom = 0.303894
+offset_right = 440.0
+offset_bottom = 400.12
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0ya63")
 sample_json = "res://resources/api_fake_responses/open_meteo_brasilia.json"
 sample_url = "https://api.open-meteo.com/v1/forecast?latitude=-15.7797&longitude=-47.9297&current=temperature_2m&hourly=temperature_2m&timezone=America%2FSao_Paulo"
-load_fake_response = true
 
 [node name="BackPanel" type="Panel" parent="."]
 layout_mode = 1
