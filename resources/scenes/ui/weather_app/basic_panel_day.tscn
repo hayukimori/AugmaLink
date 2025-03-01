@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwjf27pv2q6bk"]
+[gd_scene load_steps=7 format=3 uid="uid://bwjf27pv2q6bk"]
 
 [ext_resource type="Script" path="res://resources/scripts/weather_app/basic_panel_day.gd" id="1_62qnk"]
 
@@ -13,6 +13,13 @@ corner_radius_bottom_left = 5
 font_size = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_56ty8"]
+font_size = 12
+
+[sub_resource type="SystemFont" id="SystemFont_dspq1"]
+font_names = PackedStringArray("Inter")
+
+[sub_resource type="LabelSettings" id="LabelSettings_7gilo"]
+font = SubResource("SystemFont_dspq1")
 font_size = 12
 
 [node name="BasicPanelDay" type="Panel"]
@@ -57,5 +64,18 @@ offset_bottom = -8.0
 grow_vertical = 0
 text = "XXºC"
 label_settings = SubResource("LabelSettings_56ty8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.646
+offset_bottom = -0.0340004
+grow_horizontal = 2
+grow_vertical = 2
+text = "30/02/2025"
+label_settings = SubResource("LabelSettings_7gilo")
 horizontal_alignment = 1
 vertical_alignment = 1

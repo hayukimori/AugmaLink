@@ -1,9 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://bhj3u176m8m7f"]
+[gd_scene load_steps=24 format=3 uid="uid://bhj3u176m8m7f"]
 
 [ext_resource type="Script" path="res://resources/scripts/weather_app/weather_app.gd" id="1_0ya63"]
 [ext_resource type="Script" path="res://addons/TextureRectRounded/TextureRectRounded.gd" id="2_ky8m2"]
 [ext_resource type="Texture2D" uid="uid://b4ji5571tu5xi" path="res://assets/textures/UI_items/loading_spritesheet.png" id="2_owu2g"]
 [ext_resource type="Texture2D" uid="uid://d0vrfvjenx3q5" path="res://assets/textures/icons/weather_icon_sao_os.png" id="3_3755i"]
+[ext_resource type="Texture2D" uid="uid://dwfnu5krnb1fw" path="res://assets/textures/icons/arrow_upward.png" id="3_su5pu"]
+[ext_resource type="Texture2D" uid="uid://i7x0f3bd1ich" path="res://assets/textures/icons/arrow_downard.png" id="4_h4co3"]
 [ext_resource type="Texture2D" uid="uid://vovm1vsehl5j" path="res://assets/textures/icons/remove.png" id="4_y2v11"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chsr8"]
@@ -35,6 +37,17 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="Gradient" id="Gradient_vnqm5"]
+offsets = PackedFloat32Array(0, 0.547826, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.741176, 0.741176, 0.741176, 0.278431, 1, 1, 1, 0.364706)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vwn17"]
+frequency = 0.0006
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e4rq8"]
+color_ramp = SubResource("Gradient_vnqm5")
+noise = SubResource("FastNoiseLite_vwn17")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkgqy"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
@@ -48,9 +61,11 @@ colors = PackedColorArray(0.462623, 0.757198, 0.878843, 1, 0.61944, 0.800183, 0.
 gradient = SubResource("Gradient_j6xu4")
 
 [sub_resource type="SystemFont" id="SystemFont_h72oj"]
+font_names = PackedStringArray("Inter")
 
 [sub_resource type="LabelSettings" id="LabelSettings_v505i"]
 font = SubResource("SystemFont_h72oj")
+font_size = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ao1my"]
 bg_color = Color(1, 1, 1, 1)
@@ -113,6 +128,7 @@ grow_vertical = 2
 script = ExtResource("1_0ya63")
 sample_json = "res://resources/api_fake_responses/open_meteo_brasilia.json"
 sample_url = "https://api.open-meteo.com/v1/forecast?latitude=-15.7797&longitude=-47.9297&current=temperature_2m&hourly=temperature_2m&timezone=America%2FSao_Paulo"
+load_fake_response = true
 
 [node name="BackPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -199,9 +215,19 @@ grow_vertical = 2
 layout_mode = 0
 offset_left = 31.0
 offset_top = 38.0
-offset_right = 283.0
+offset_right = 263.0
 offset_bottom = 281.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rvbm1")
+
+[node name="CloudsTextureRect" type="TextureRect" parent="BackPanel/CurrentDayPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_e4rq8")
+expand_mode = 1
 
 [node name="CurrentDegreesLabel" type="Label" parent="BackPanel/CurrentDayPanel"]
 layout_mode = 1
@@ -223,28 +249,56 @@ vertical_alignment = 1
 [node name="MaximumDegreesLabel" type="Label" parent="BackPanel/CurrentDayPanel"]
 layout_mode = 0
 offset_top = 145.0
-offset_right = 119.0
+offset_right = 107.0
 offset_bottom = 243.0
 text = "30ºC"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TextureRect" type="TextureRect" parent="BackPanel/CurrentDayPanel/MaximumDegreesLabel"]
+modulate = Color(2, 2, 2, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 84.0
+offset_top = -9.0
+offset_right = 101.0
+offset_bottom = 11.0
+grow_vertical = 2
+texture = ExtResource("3_su5pu")
+expand_mode = 1
+
 [node name="MinimumDegreesLabel" type="Label" parent="BackPanel/CurrentDayPanel"]
 layout_mode = 0
-offset_left = 126.0
+offset_left = 116.0
 offset_top = 145.0
-offset_right = 252.0
+offset_right = 232.0
 offset_bottom = 243.0
 text = "30ºC"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="BackPanel/CurrentDayPanel/MinimumDegreesLabel"]
+modulate = Color(2, 2, 2, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 18.0
+offset_top = -9.0
+offset_right = 35.0
+offset_bottom = 11.0
+grow_vertical = 2
+texture = ExtResource("4_h4co3")
+expand_mode = 1
 
 [node name="TitleBar" type="Control" parent="."]
 layout_mode = 1
 anchor_top = -0.03
 anchor_right = 1.0
 anchor_bottom = 0.043
-offset_bottom = -0.199995
+offset_bottom = -0.199997
 grow_horizontal = 2
 
 [node name="TextureRectRounded" type="Panel" parent="TitleBar"]
@@ -261,7 +315,7 @@ radius_bottom_left = 0
 radius_bottom_right = 0
 texture = SubResource("GradientTexture2D_avogp")
 
-[node name="Label" type="Label" parent="TitleBar"]
+[node name="AppTitleLabel" type="Label" parent="TitleBar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

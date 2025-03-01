@@ -19,7 +19,7 @@ enum WEngine {OpenMeteo}
 @onready var sprite_animations: AnimationPlayer = $SpriteAnimations
 @onready var sprite_2d: Sprite2D = $BackPanel/LeftContainers/Sprite2D
 @onready var bars_container: HBoxContainer = $BackPanel/LeftContainers/horizontal_line_space/bars
-
+@onready var clouds_texture_rect: TextureRect = $BackPanel/CurrentDayPanel/CloudsTextureRect
 
 @onready var horizontal_line_space: Control = $BackPanel/LeftContainers/horizontal_line_space
 @onready var http_request: HTTPRequest = $HTTPRequest
@@ -210,3 +210,10 @@ func _api_rp_complete(result: int, response_code: int, _headers: PackedStringArr
 
 func _on_quit_btn_pressed() -> void:
 	queue_free()
+
+
+func _process(delta: float):
+	var clouds_noise: NoiseTexture2D = clouds_texture_rect.texture
+	var noise: FastNoiseLite = clouds_noise.noise
+	
+	noise.offset.x += 50 * delta
