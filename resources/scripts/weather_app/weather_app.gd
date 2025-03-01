@@ -192,10 +192,6 @@ func process_listed_weather(rearranged_list:Array[Dictionary], ret_method: int =
 		_: return {"error": "Return method not available"}
 
 
-func _on_reload_data_pressed() -> void:
-	#get_data()
-	http_request.request(sample_url)
-
 func _instantiate_panels(simple_data: Dictionary):
 	var bpd: PackedScene = load("res:///resources/scenes/ui/weather_app/basic_panel_day.tscn")
 	

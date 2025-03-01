@@ -229,19 +229,6 @@ text = "30ºC"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="reload_data" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.089
-anchor_top = 1.15
-anchor_right = -0.089
-anchor_bottom = 1.15
-offset_left = 0.319984
-offset_top = 9.15527e-05
-offset_right = 117.32
-offset_bottom = 31.0001
-text = "RELOAD DATA"
-
 [node name="TitleBar" type="Control" parent="."]
 layout_mode = 1
 anchor_top = -0.03
@@ -323,5 +310,4 @@ libraries = {
 "": SubResource("AnimationLibrary_n8yvu")
 }
 
-[connection signal="pressed" from="reload_data" to="." method="_on_reload_data_pressed"]
 [connection signal="pressed" from="TitleBar/quit_btn" to="." method="_on_quit_btn_pressed"]
