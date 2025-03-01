@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://resources/scripts/weather_app/basic_panel_day.gd" id="1_62qnk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lly52"]
-bg_color = Color(1, 0.781294, 0.826569, 1)
+bg_color = Color(0.623529, 0.898039, 0.933333, 0.690196)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -22,17 +22,28 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_lly52")
 script = ExtResource("1_62qnk")
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 53.0
-offset_right = 112.0
-offset_bottom = 76.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -32.0
+offset_right = -10.0
+offset_bottom = -9.0
+grow_horizontal = 0
+grow_vertical = 0
 text = "XXºC"
 
 [node name="Label2" type="Label" parent="."]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 53.0
-offset_right = 49.0
-offset_bottom = 76.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -32.0
+offset_right = 52.0
+offset_bottom = -8.0
+grow_vertical = 0
 text = "XXºC"

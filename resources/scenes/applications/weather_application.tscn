@@ -1,20 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhj3u176m8m7f"]
+[gd_scene load_steps=10 format=3 uid="uid://bhj3u176m8m7f"]
 
 [ext_resource type="Script" path="res://resources/scripts/weather_app/weather_app.gd" id="1_0ya63"]
+[ext_resource type="Script" path="res://addons/TextureRectRounded/TextureRectRounded.gd" id="2_ky8m2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chsr8"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvbm1"]
-bg_color = Color(1, 0.337627, 0.552329, 0.690196)
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.00781262, 0.662913, 0.666819, 1)
+border_blend = true
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="Gradient" id="Gradient_rp8be"]
+colors = PackedColorArray(0.694118, 0.556863, 0.6, 0.180392, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xmfeg"]
+gradient = SubResource("Gradient_rp8be")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvbm1"]
+bg_color = Color(0.623071, 0.89934, 0.932184, 0.690196)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u0fcm"]
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+anti_aliasing = false
+
+[sub_resource type="Gradient" id="Gradient_j6xu4"]
+offsets = PackedFloat32Array(0, 0.3, 1)
+colors = PackedColorArray(0, 0.758592, 0.761083, 1, 0.419608, 1, 1, 1, 1.2514e-06, 0.653946, 0.658671, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_avogp"]
+gradient = SubResource("Gradient_j6xu4")
 
 [node name="WeatherApp" type="Control"]
 layout_mode = 3
@@ -39,6 +67,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_chsr8")
+
+[node name="TextureRect" type="TextureRect" parent="BackPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_xmfeg")
 
 [node name="LeftContainers" type="Control" parent="BackPanel"]
 layout_mode = 1
@@ -89,10 +126,10 @@ grow_vertical = 2
 
 [node name="CurrentDayPanel" type="Panel" parent="BackPanel"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 17.0
-offset_right = 282.0
-offset_bottom = 260.0
+offset_left = 31.0
+offset_top = 38.0
+offset_right = 283.0
+offset_bottom = 281.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rvbm1")
 
 [node name="CurrentDegreesLabel" type="Label" parent="BackPanel/CurrentDayPanel"]
@@ -132,9 +169,29 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="reload_data" type="Button" parent="."]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.306
+anchor_bottom = 0.306
+offset_left = -1.52588e-05
+offset_top = -26.4
+offset_right = 117.0
+offset_bottom = 4.60003
 text = "RELOAD DATA"
+
+[node name="TextureRectRounded" type="Panel" parent="."]
+clip_children = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.03
+anchor_right = 1.0
+anchor_bottom = 0.03
+offset_bottom = 5.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u0fcm")
+script = ExtResource("2_ky8m2")
+radius_bottom_left = 0
+radius_bottom_right = 0
+texture = SubResource("GradientTexture2D_avogp")
 
 [connection signal="pressed" from="reload_data" to="." method="_on_reload_data_pressed"]

@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://resources/scripts/message_app/chat_application.gd" id="1_21gti"]
 [ext_resource type="Script" path="res://addons/TextureRectRounded/TextureRectRounded.gd" id="2_k7k3w"]
 [ext_resource type="Texture2D" uid="uid://d26sm6xnvr42s" path="res://assets/textures/backgrounds/ui_topbar_window.tres" id="3_l4l28"]
-[ext_resource type="Texture2D" uid="uid://d1sbkb30cycfj" path="res://assets/textures/icons/chat_app_icon_sao_os.png" id="4_mx5l7"]
-[ext_resource type="Texture2D" uid="uid://d1yrpm2lo2wnn" path="res://assets/textures/icons/remove.png" id="5_s7pm7"]
-[ext_resource type="Texture2D" uid="uid://dxr1r0of1y1tu" path="res://assets/textures/icons/arrow_forward.png" id="6_qwwcb"]
+[ext_resource type="Texture2D" uid="uid://bopx6f47lqch0" path="res://assets/textures/icons/chat_app_icon_sao_os.png" id="4_mx5l7"]
+[ext_resource type="Texture2D" uid="uid://vovm1vsehl5j" path="res://assets/textures/icons/remove.png" id="5_s7pm7"]
+[ext_resource type="Texture2D" uid="uid://c4w4c213i1hev" path="res://assets/textures/icons/arrow_forward.png" id="6_qwwcb"]
 [ext_resource type="StyleBox" uid="uid://t5kfrqcuukfh" path="res://resources/materials/input_text_lineedit.tres" id="7_6r05r"]
 [ext_resource type="PackedScene" uid="uid://ktm7k0co2o7l" path="res://addons/mqtt/mqtt.tscn" id="8_2exw2"]
 
@@ -29,7 +29,7 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 shadow_color = Color(0.545098, 0.156863, 0.156863, 0.6)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7o4px"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8710"]
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_detail = 20
@@ -159,7 +159,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7o4px")
+theme_override_styles/panel = SubResource("StyleBoxFlat_q8710")
 script = ExtResource("2_k7k3w")
 corner_detail = 60
 radius_bottom_left = 0

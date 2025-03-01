@@ -79,10 +79,10 @@ func draw_baselines(data: Dictionary):
 	var last_point_data = Vector2.ZERO
 	
 	var line: Line2D = Line2D.new()
-	line.joint_mode = Line2D.LINE_JOINT_SHARP
+	line.joint_mode = Line2D.LINE_JOINT_BEVEL
 	line.width = 2
 	line.antialiased = true
-	line.default_color = Color.LIGHT_CORAL
+	line.default_color = Color.hex(0x9fe5eeb0)
 	horizontal_line_space.add_child(line)
 	
 	for item in date_data:
@@ -91,7 +91,7 @@ func draw_baselines(data: Dictionary):
 		var current_point = Vector2(last_point_data.x + sbp,  _2d_line_y + date_data[item] * 2)
 		
 		var nlabel = Label.new()
-		nlabel.text = item.split("T")[1]
+		nlabel.text = "%sh" % item.split("T")[1].split(":")[0]
 		nlabel.position = Vector2(point_x, 200)
 		nlabel.scale = Vector2(0.5, 0.5)
 		horizontal_line_space.add_child(nlabel)
@@ -153,11 +153,9 @@ func process_listed_weather(rearranged_list:Array[Dictionary], ret_method: int =
 		_: return {"error": "Return method not available"}
 
 
-# TODO: Move this function to the bottom
 func _on_reload_data_pressed() -> void:
 	get_data()
 
-# TODO: Move this function to the bottom
 func _instantiate_panels(simple_data: Dictionary):
 	var bpd: PackedScene = load("res:///resources/scenes/ui/weather_app/basic_panel_day.tscn")
 	
