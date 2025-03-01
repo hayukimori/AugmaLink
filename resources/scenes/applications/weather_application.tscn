@@ -29,20 +29,20 @@ fill_from = Vector2(0.5, 0)
 fill_to = Vector2(0.5, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvbm1"]
-bg_color = Color(0.623071, 0.89934, 0.932184, 0.690196)
+bg_color = Color(0.462623, 0.757198, 0.878843, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77xkc"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkgqy"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 anti_aliasing = false
 
 [sub_resource type="Gradient" id="Gradient_j6xu4"]
 offsets = PackedFloat32Array(0, 0.3, 1)
-colors = PackedColorArray(0, 0.758592, 0.761083, 1, 0.419608, 1, 1, 1, 1.2514e-06, 0.653946, 0.658671, 1)
+colors = PackedColorArray(0.462623, 0.757198, 0.878843, 1, 0.61944, 0.800183, 0.890562, 1, 0.462623, 0.757198, 0.878843, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_avogp"]
 gradient = SubResource("Gradient_j6xu4")
@@ -113,7 +113,7 @@ grow_vertical = 2
 script = ExtResource("1_0ya63")
 sample_json = "res://resources/api_fake_responses/open_meteo_brasilia.json"
 sample_url = "https://api.open-meteo.com/v1/forecast?latitude=-15.7797&longitude=-47.9297&current=temperature_2m&hourly=temperature_2m&timezone=America%2FSao_Paulo"
-_2d_line_y = 50.0
+load_fake_response = true
 
 [node name="BackPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -147,20 +147,30 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="BackPanel/LeftContainers"]
+visible = false
 position = Vector2(591, 150)
 texture = ExtResource("2_owu2g")
 hframes = 42
 
 [node name="horizontal_line_space" type="Control" parent="BackPanel/LeftContainers"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -127.0
-offset_top = 14.0
-offset_right = 391.0
-offset_bottom = 203.0
+anchor_left = 0.329
+anchor_top = 0.1
+anchor_right = 1.036
+anchor_bottom = 0.715
+offset_left = -0.14801
+offset_top = -0.0999947
+offset_right = -12.232
+offset_bottom = -0.11496
 grow_horizontal = 2
+
+[node name="bars" type="HBoxContainer" parent="BackPanel/LeftContainers/horizontal_line_space"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.953
+anchor_bottom = 1.023
+offset_right = -0.0220337
+offset_bottom = -0.106003
 
 [node name="BaseContainers" type="Control" parent="BackPanel/LeftContainers"]
 layout_mode = 1
@@ -179,9 +189,10 @@ grow_vertical = 0
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.101
-anchor_right = 1.0
+anchor_right = 1.021
 anchor_bottom = 1.0
 offset_top = 0.0109997
+offset_right = -0.052002
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -245,7 +256,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_77xkc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_vkgqy")
 script = ExtResource("2_ky8m2")
 radius_bottom_left = 0
 radius_bottom_right = 0

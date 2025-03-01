@@ -1,7 +1,6 @@
 extends Control
 
 
-
 enum WEngine {OpenMeteo}
 
 @export_category("Application Flags")
@@ -19,14 +18,11 @@ enum WEngine {OpenMeteo}
 @onready var minimum_degrees_label: Label = $BackPanel/CurrentDayPanel/MinimumDegreesLabel
 @onready var sprite_animations: AnimationPlayer = $SpriteAnimations
 @onready var sprite_2d: Sprite2D = $BackPanel/LeftContainers/Sprite2D
+@onready var bars_container: HBoxContainer = $BackPanel/LeftContainers/horizontal_line_space/bars
 
 
 @onready var horizontal_line_space: Control = $BackPanel/LeftContainers/horizontal_line_space
 @onready var http_request: HTTPRequest = $HTTPRequest
-
-
-@export_category("Visual")
-@export var _2d_line_y: float = 0.0
 
 
 var timezone: String = ""
@@ -93,7 +89,8 @@ func get_data(custom_response: Dictionary) -> void:
 		var current_date_string: String = "%d-%02d-%02d" % \
 		[current_date.year, current_date.month, current_date.day]
 		
-		draw_baselines(temp[0])
+		new_baselines(temp[0], temp[1])
+		#draw_baselines(temp[0], temp[1])
 		set_min_max_dg(temp[1], current_date_string, maximum_degrees_label, minimum_degrees_label)
 		_instantiate_panels(temp[1])
 
@@ -108,11 +105,40 @@ func set_min_max_dg(simple_data: Dictionary, date_string: String, label_max: Lab
 	label_min.text = "%d ºC" % int(mi_dg)
 
 
-func draw_baselines(data: Dictionary):
+func new_baselines(data: Dictionary, simple_data: Dictionary):
+	var current_datetime: Dictionary = Time.get_date_dict_from_system()
+	var date_string = "%d-%02d-%02d" % [current_datetime.year, current_datetime.month, current_datetime.day]
+	
+	var date_full_data = data.get(date_string)
+	var date_simple_data = simple_data.get(date_string)
+	
+	var min_dg = date_simple_data["minimum"]
+	var max_dg = date_simple_data["maximum"]
+	
+	var hourly_bar_src = load("res://resources/scenes/ui/weather_app/hourly_bar.tscn")
+	
+	for item in date_full_data:
+		var current_temp = date_full_data[item]
+		var _lp = ((current_temp - min_dg)/(max_dg*1.5 - min_dg*1.5)) * 100
+		
+		var current_bar: ProgressBar = hourly_bar_src.instantiate()
+		current_bar.custom_minimum_size.x = 19
+		current_bar.value = _lp
+		
+		bars_container.add_child(current_bar)
+		
+
+
+func draw_baselines(data: Dictionary, simple_data: Dictionary):
 	var current_datetime: Dictionary = Time.get_date_dict_from_system()
 	var date_string = "%d-%02d-%02d" % [current_datetime.year, current_datetime.month, current_datetime.day]
 	
 	var date_data = data.get(date_string)
+	var date_simple_data = simple_data.get(date_string)
+	
+	var min_dg = date_simple_data["minimum"]
+	var max_dg = date_simple_data["maximum"]
+	
 	var sbp = horizontal_line_space.size.x / len(date_data) 
 	
 	var last_point_data = Vector2.ZERO
@@ -125,9 +151,11 @@ func draw_baselines(data: Dictionary):
 	horizontal_line_space.add_child(line)
 	
 	for item in date_data:
+		var _lp = ((date_data[item] - min_dg)/(max_dg - min_dg)) * horizontal_line_space.size.y
+		
 		var point_x = last_point_data.x + sbp
-		var point_y = date_data[item] * 4
-		var current_point = Vector2(last_point_data.x + sbp,  _2d_line_y + date_data[item] * 2)
+		var current_point = Vector2(last_point_data.x + sbp, (horizontal_line_space.size.y + 10) + (_lp * -1))
+		
 		
 		var nlabel = Label.new()
 		nlabel.text = "%sh" % item.split("T")[1].split(":")[0]
@@ -170,7 +198,6 @@ func process_listed_weather(rearranged_list:Array[Dictionary], ret_method: int =
 
 
 	for day in days_groups:
-		#print(day)
 		var schedule_temperatures = days_groups[day]
 		var temperatures_list: Array = []
 		
@@ -200,14 +227,16 @@ func _instantiate_panels(simple_data: Dictionary):
 		
 		var current_panel = bpd.instantiate()
 		var sd_content: Dictionary = simple_data[item]
+		var bg_color: Color = Color("76c1e0")
 	
 		current_panel.min_max_degrees = Vector2(sd_content["minimum"], sd_content["maximum"])
+		current_panel.set_background_color(bg_color)
 		
 		z.add_child(current_panel)
 		current_panel.update_dg(temperature_unit)
 
 
-func _api_rp_complete(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray):
+func _api_rp_complete(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
 	if result == HTTPRequest.RESULT_SUCCESS:
 		if response_code == 200:
 			var response = body.get_string_from_utf8()

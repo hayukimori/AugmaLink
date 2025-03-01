@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmw1t1vdi8bmd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07gpq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4s0qr"]
+bg_color = Color(0.462745, 0.756863, 0.878431, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="ProgressBar" type="ProgressBar"]
+custom_minimum_size = Vector2(20, 0)
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_07gpq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4s0qr")
+value = 11.6
+fill_mode = 3
+show_percentage = false

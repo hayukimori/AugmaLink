@@ -1,13 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwjf27pv2q6bk"]
+[gd_scene load_steps=5 format=3 uid="uid://bwjf27pv2q6bk"]
 
 [ext_resource type="Script" path="res://resources/scripts/weather_app/basic_panel_day.gd" id="1_62qnk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lly52"]
-bg_color = Color(0.623529, 0.898039, 0.933333, 0.690196)
+bg_color = Color(0, 0.843137, 0.847059, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_y1pvj"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_56ty8"]
+font_size = 12
 
 [node name="BasicPanelDay" type="Panel"]
 anchors_preset = 2
@@ -35,6 +41,9 @@ offset_bottom = -9.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "XXºC"
+label_settings = SubResource("LabelSettings_y1pvj")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 1
@@ -47,3 +56,6 @@ offset_right = 52.0
 offset_bottom = -8.0
 grow_vertical = 0
 text = "XXºC"
+label_settings = SubResource("LabelSettings_56ty8")
+horizontal_alignment = 1
+vertical_alignment = 1
