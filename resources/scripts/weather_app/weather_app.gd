@@ -3,9 +3,6 @@ extends Control
 
 enum WEngine {OpenMeteo}
 
-@export_category("Application Flags")
-
-
 @export_category("Weather Application")
 @export var weather_engine: WEngine # Will not be used by now, but in the future it will be used
 @export_file var sample_json
