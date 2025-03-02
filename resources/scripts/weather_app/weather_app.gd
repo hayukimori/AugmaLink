@@ -3,6 +3,7 @@ extends Control
 
 enum WEngine {OpenMeteo}
 
+
 @export_category("Weather Application")
 @export var weather_engine: WEngine # Will not be used by now, but in the future it will be used
 @export_file var sample_json
@@ -18,6 +19,7 @@ enum WEngine {OpenMeteo}
 @onready var sprite_2d: Sprite2D = $BackPanel/LeftContainers/Sprite2D
 @onready var bars_container: HBoxContainer = $BackPanel/LeftContainers/horizontal_line_space/bars
 @onready var clouds_texture_rect: TextureRect = $BackPanel/CurrentDayPanel/CloudsTextureRect
+@onready var current_day_status_image: TextureRect = $BackPanel/CurrentDayPanel/CurrentDayStatusImage
 
 @onready var horizontal_line_space: Control = $BackPanel/LeftContainers/horizontal_line_space
 @onready var http_request: HTTPRequest = $HTTPRequest
@@ -41,6 +43,7 @@ class Day:
 	var date: String # "2025-03-01"
 	var date_fragments: Array[DateTimeFragment] = []
 	var min_max: Vector2
+
 
 func _ready():
 	global_weather_codes = read_json_file(weather_codes_json, true)
@@ -80,24 +83,40 @@ func get_data(custom_response: Dictionary) -> void:
 	temperature_unit = response["current_units"]["temperature_2m"]
 
 
-	var temp2: Array[Day] = new_process_weather_data(timestamps, temperatures, list_weather_codes)
+	var dates_data: Array[Day] = new_process_weather_data(timestamps, temperatures, list_weather_codes)
+
+	update_central_card(response, dates_data)
+	
+	create_baselines(dates_data)
+	_instantiate_panels(dates_data)
 
 
-	var current_date: Dictionary = Time.get_date_dict_from_system()
-	current_degrees_label.text = "%02d %s" % [int(response["current"]["temperature_2m"]), temperature_unit]
-		
+func update_central_card(main_response: Dictionary, dates: Array[Day]) -> void:
+	var current_date: Dictionary = Time.get_datetime_dict_from_system()
+	var current_temperature: float = main_response["current"]["temperature_2m"]
 	var current_date_string: String = "%d-%02d-%02d" % \
 		[current_date.year, current_date.month, current_date.day]
-		
-	create_baselines(temp2)
-	set_min_max_dg(temp2, current_date_string, maximum_degrees_label, minimum_degrees_label)
-	_instantiate_panels(temp2)
+	var current_weather_code: int = main_response["current"]["weather_code"]
+
+	
+	current_degrees_label.text = "%s%s" % [current_temperature, temperature_unit]
+	set_min_max_dg(dates, current_date_string, maximum_degrees_label, minimum_degrees_label)
+	
+
+	# Set current weather image by code
+	var code_match = search_code(current_weather_code)
+	var image = Image.load_from_file(code_match["day"]["image"])
+	var texture = ImageTexture.create_from_image(image)
+
+	current_day_status_image.texture = texture
+
+
 
 
 func set_min_max_dg(data: Array[Day], date_string: String, label_max: Label, label_min: Label):
 	
 	var date_data: Day = match_date(data, date_string)
-	
+
 	var mi_dg: float = date_data.min_max.x
 	var ma_dg: float = date_data.min_max.y
 	
@@ -215,6 +234,7 @@ func _instantiate_panels(data: Array[Day]):
 	for day in data:
 		var z = $BackPanel/LeftContainers/BaseContainers/HBoxContainer
 		
+		# Set basic panel color
 		var current_panel = bpd.instantiate()
 		var bg_color: Color = Color("76c1e0")
 	
@@ -227,11 +247,15 @@ func _instantiate_panels(data: Array[Day]):
 			codes.append(frag.weather_code)
 		
 		var dom: int = get_frequent(codes)
-		var code_tranlation: Dictionary = search_code(dom)
+
+		# Get the code from codes json file
+		var code_translation: Dictionary = search_code(dom)
 		
 		
 		z.add_child(current_panel)
-		current_panel.update_central_label(code_tranlation["day"]["description"])
+
+		current_panel.update_central_label(code_translation["day"]["description"])
+		current_panel.update_central_image(code_translation["day"]["image"])
 		current_panel.update_dg(temperature_unit)
 
 

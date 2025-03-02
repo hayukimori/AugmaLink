@@ -127,8 +127,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0ya63")
 sample_json = "res://resources/api_fake_responses/open_meteo_brasilia_with_codes.json"
-weather_codes_json = "res://resources/fundamentals_open_weather_api/code_interpretation.json"
+weather_codes_json = "res://resources/fundamentals_open_weather_api/code_interpretation_local_images.json"
 sample_url = "https://api.open-meteo.com/v1/forecast?latitude=-15.7797&longitude=-47.9297&current=temperature_2m,precipitation,weather_code&hourly=temperature_2m,rain,weather_code"
+load_fake_response = true
 
 [node name="BackPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -229,6 +230,14 @@ grow_vertical = 2
 texture = SubResource("NoiseTexture2D_e4rq8")
 expand_mode = 1
 
+[node name="CurrentDayStatusImage" type="TextureRect" parent="BackPanel/CurrentDayPanel"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 15.0
+offset_right = 164.0
+offset_bottom = 122.0
+expand_mode = 1
+
 [node name="CurrentDegreesLabel" type="Label" parent="BackPanel/CurrentDayPanel"]
 layout_mode = 1
 anchors_preset = -1
@@ -237,9 +246,9 @@ anchor_top = 0.596
 anchor_right = 0.5
 anchor_bottom = 0.596
 offset_left = -126.0
-offset_top = -144.828
+offset_top = -57.828
 offset_right = 126.0
-offset_bottom = 0.171997
+offset_bottom = 20.172
 grow_horizontal = 2
 grow_vertical = 2
 text = "00ºC"

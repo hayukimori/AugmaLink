@@ -5,6 +5,7 @@ extends Panel
 @onready var label: Label = $Label
 @onready var label_2: Label = $Label2
 @onready var central_label: Label = $Label3
+@onready var central_image: TextureRect = $CentralImage 
 
 var can_update: bool = false
 
@@ -27,6 +28,16 @@ func set_background_color(target_color: Color):
 func update_central_label(content: String):
 	if can_update:
 		central_label.text = content
+	else:
+		printerr("Couldn't update status. Not ready.")
+
+func update_central_image(image_src: String) -> void:
+	if can_update:
+		var image = Image.new()
+		image.load(image_src)
+
+		var texture = ImageTexture.create_from_image(image)
+		central_image.texture = texture
 	else:
 		printerr("Couldn't update status. Not ready.")
 
