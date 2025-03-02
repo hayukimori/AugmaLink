@@ -48,7 +48,7 @@ frequency = 0.0006
 color_ramp = SubResource("Gradient_vnqm5")
 noise = SubResource("FastNoiseLite_vwn17")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkgqy"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rge6o"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 anti_aliasing = false
@@ -76,6 +76,21 @@ corner_radius_bottom_left = 2
 shadow_color = Color(0.0509804, 0.784314, 0.788235, 0.407843)
 shadow_size = 2
 
+[sub_resource type="Animation" id="Animation_geap1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackPanel/LeftContainers/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_f1j30"]
 resource_name = "loading"
 loop_mode = 1
@@ -90,21 +105,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0, 41]
-}
-
-[sub_resource type="Animation" id="Animation_geap1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BackPanel/LeftContainers/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n8yvu"]
@@ -309,7 +309,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_vkgqy")
+theme_override_styles/panel = SubResource("StyleBoxFlat_rge6o")
 script = ExtResource("2_ky8m2")
 radius_bottom_left = 0
 radius_bottom_right = 0

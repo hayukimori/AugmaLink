@@ -81,11 +81,8 @@ func get_data(custom_response: Dictionary) -> void:
 	
 	timeformat = response["current_units"]["time"]
 	temperature_unit = response["current_units"]["temperature_2m"]
-	
-	var tsp_len = len(timestamps)
-	var tmp_len = len(temperatures)
-	
-	var rearranged_list: Array[Dictionary] = []
+
+
 	var temp2: Array[Day] = new_process_weather_data(timestamps, temperatures, list_weather_codes)
 
 
@@ -107,8 +104,8 @@ func set_min_max_dg(data: Array[Day], date_string: String, label_max: Label, lab
 	var mi_dg: float = date_data.min_max.x
 	var ma_dg: float = date_data.min_max.y
 	
-	label_max.text = "%d ºC" % int(ma_dg)
-	label_min.text = "%d ºC" % int(mi_dg)
+	label_max.text = "%d %s" % [int(ma_dg), temperature_unit]
+	label_min.text = "%d %s" % [int(mi_dg), temperature_unit]
 
 
 func match_date(dates: Array[Day], date_string: String) -> Day:
