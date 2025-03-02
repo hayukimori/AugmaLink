@@ -4,6 +4,7 @@ extends Panel
 
 @onready var label: Label = $Label
 @onready var label_2: Label = $Label2
+@onready var central_label: Label = $Label3
 
 var can_update: bool = false
 
@@ -22,6 +23,12 @@ func set_background_color(target_color: Color):
 	add_theme_stylebox_override("panel", new_sb)
 	#var current_sb = get_theme_stylebox("panel")
 	#current_sb.bg_color = target_color
+
+func update_central_label(content: String):
+	if can_update:
+		central_label.text = content
+	else:
+		printerr("Couldn't update status. Not ready.")
 
 func update_dg(temperature_unit: String):
 	if can_update:

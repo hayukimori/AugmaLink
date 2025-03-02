@@ -9,6 +9,7 @@ enum WEngine {OpenMeteo}
 @export_category("Weather Application")
 @export var weather_engine: WEngine # Will not be used by now, but in the future it will be used
 @export_file var sample_json
+@export_file var weather_codes_json
 @export var sample_url: String
 @export var load_fake_response: bool
 
@@ -25,19 +26,33 @@ enum WEngine {OpenMeteo}
 @onready var http_request: HTTPRequest = $HTTPRequest
 
 
+
 var timezone: String = ""
 var timeformat: String = "iso8601"
 var temperature_unit: String = "ºC"
+var global_weather_codes
+var days: Array = []
 
+
+class DateTimeFragment:
+	var timestamp: String
+	var temperature: float
+	var weather_code: int
+
+
+class Day:
+	var date: String # "2025-03-01"
+	var date_fragments: Array[DateTimeFragment] = []
+	var min_max: Vector2
 
 func _ready():
+	global_weather_codes = read_json_file(weather_codes_json, true)
+	
 	sprite_2d.visible = true
 	sprite_animations.play("loading")
 	
 	http_request.request_completed.connect(_api_rp_complete)
-	
-	await get_tree().process_frame
-	
+
 	if load_fake_response != true:
 		http_request.request(sample_url)
 	else:
@@ -55,7 +70,6 @@ func fake_response() -> Dictionary:
 
 
 func get_data(custom_response: Dictionary) -> void:
-	
 	if sprite_animations.is_playing():
 		sprite_animations.stop()
 		sprite_2d.visible = false
@@ -63,6 +77,7 @@ func get_data(custom_response: Dictionary) -> void:
 	var response = custom_response
 	var timestamps = response["hourly"]["time"]
 	var temperatures = response["hourly"]["temperature_2m"]
+	var list_weather_codes: Array = response["hourly"]["weather_code"]
 	
 	timeformat = response["current_units"]["time"]
 	temperature_unit = response["current_units"]["temperature_2m"]
@@ -71,55 +86,55 @@ func get_data(custom_response: Dictionary) -> void:
 	var tmp_len = len(temperatures)
 	
 	var rearranged_list: Array[Dictionary] = []
+	var temp2: Array[Day] = new_process_weather_data(timestamps, temperatures, list_weather_codes)
 
-	if tsp_len != tmp_len:
-		print("Timestamps legnth and temperatures length are different.")
-		
-	else:
-		for i in range(tsp_len):
-			rearranged_list.append(
-				{ timestamps[i]: temperatures[i] }
-			)
 
-		var temp = process_listed_weather(rearranged_list, 2)
-		var current_date: Dictionary = Time.get_date_dict_from_system()
+	var current_date: Dictionary = Time.get_date_dict_from_system()
+	current_degrees_label.text = "%02d %s" % [int(response["current"]["temperature_2m"]), temperature_unit]
 		
-		current_degrees_label.text = "%02d %s" % [int(response["current"]["temperature_2m"]), temperature_unit]
-		
-		var current_date_string: String = "%d-%02d-%02d" % \
+	var current_date_string: String = "%d-%02d-%02d" % \
 		[current_date.year, current_date.month, current_date.day]
 		
-		create_baselines(temp[0], temp[1])
-		#draw_baselines(temp[0], temp[1])
-		set_min_max_dg(temp[1], current_date_string, maximum_degrees_label, minimum_degrees_label)
-		_instantiate_panels(temp[1])
+	create_baselines(temp2)
+	set_min_max_dg(temp2, current_date_string, maximum_degrees_label, minimum_degrees_label)
+	_instantiate_panels(temp2)
 
 
-func set_min_max_dg(simple_data: Dictionary, date_string: String, label_max: Label, label_min: Label):
-	var date_data = simple_data.get(date_string)
+func set_min_max_dg(data: Array[Day], date_string: String, label_max: Label, label_min: Label):
 	
-	var ma_dg: float = date_data.get("maximum")
-	var mi_dg: float = date_data.get("minimum")
+	var date_data: Day = match_date(data, date_string)
+	
+	var mi_dg: float = date_data.min_max.x
+	var ma_dg: float = date_data.min_max.y
 	
 	label_max.text = "%d ºC" % int(ma_dg)
 	label_min.text = "%d ºC" % int(mi_dg)
 
 
-func create_baselines(data: Dictionary, simple_data: Dictionary):
+func match_date(dates: Array[Day], date_string: String) -> Day:
+	var found: Day
+	
+	for x in dates:
+		if x.date == date_string:
+			found = x
+			
+	return found
+
+func create_baselines(dates: Array[Day]):
 	var current_datetime: Dictionary = Time.get_date_dict_from_system()
 	var date_string = "%d-%02d-%02d" % [current_datetime.year, current_datetime.month, current_datetime.day]
 	
-	var date_full_data = data.get(date_string)
-	var date_simple_data = simple_data.get(date_string)
+	var date_data = match_date(dates, date_string)
 	
-	var min_dg = date_simple_data["minimum"]
-	var max_dg = date_simple_data["maximum"]
+	var min_dg = date_data.min_max.x
+	var max_dg = date_data.min_max.y
 	
 	var hourly_bar_src = load("res://resources/scenes/ui/weather_app/hourly_bar.tscn")
 	
-	for item in date_full_data:
-		var current_temp = date_full_data[item]
-		var _lp = ((current_temp - min_dg)/(max_dg*1.5 - min_dg*1.5)) * 100
+	for fragment in date_data.date_fragments:
+		var frag: DateTimeFragment = fragment
+		var _lp = ((frag.temperature - min_dg)/(max_dg*1.5 - min_dg*1.5)) * 100
+
 		
 		var current_bar: ProgressBar = hourly_bar_src.instantiate()
 		current_bar.custom_minimum_size.x = 19
@@ -128,71 +143,101 @@ func create_baselines(data: Dictionary, simple_data: Dictionary):
 		bars_container.add_child(current_bar)
 
 
-func process_listed_weather(rearranged_list:Array[Dictionary], ret_method: int = 0):
+func search_code(code: int) -> Dictionary:
+	if global_weather_codes:
+		if global_weather_codes.has(str(code)):
+			return global_weather_codes[str(code)]
+	return {}
+
+func new_process_weather_data(timestamps: Array, temperatures: Array, weather_codes: Array) -> Array[Day]:
+	var days_dict: Dictionary = {}
 	
-	# Methods
-	# 0 - Return days groups (Dictionary)
-	# 1 - Return days_groups_simple (Dictionary)
-	# 2 - Return days_groups and days_groups_simple
+	for i in range(len(timestamps)):
+		# Extract date
+		var full_timestamp: String = timestamps[i]
+		var date: String = full_timestamp.substr(0, 10)
+		
+		# Create fragment
+		var fragment = DateTimeFragment.new()
+		fragment.timestamp = full_timestamp
+		fragment.temperature = temperatures[i]
+		fragment.weather_code = weather_codes[i]
+
+		# Add to days_dict
+		if (date in days_dict.keys()) == false:
+			days_dict[date] = Day.new()
+			days_dict[date].date = date
+		
+		days_dict[date].date_fragments.append(fragment)
 	
-	var days_groups: Dictionary = {}
-	var days_groups_simple: Dictionary = {}
-	var current_day: String = ""
-	var current_group: Dictionary = {}
-
-	for datetime in rearranged_list:
-		var dt_date = datetime.keys()[0].split("T")[0]
-		if dt_date != current_day:
-			#print("%s != %s" % [current_day, dt_date])
-
-			if current_group != {}:
-				days_groups[current_day] = current_group
-
-			current_day = dt_date
-			current_group = {}
-		elif datetime == rearranged_list[-1]:
-			days_groups[current_day] = current_group
-
-		current_group[datetime.keys()[0]] = datetime.values()[0]
-
-
-
-	for day in days_groups:
-		var schedule_temperatures = days_groups[day]
-		var temperatures_list: Array = []
-		
-		var maximum: float = 0.0
-		var minimum: float = 0.0
-		
-		for timestamp in schedule_temperatures:
-			temperatures_list.append(schedule_temperatures[timestamp])	
-		
-		maximum = temperatures_list.max()
-		minimum = temperatures_list.min()
-		
-		days_groups_simple[day] =  {"maximum": maximum, "minimum": minimum}
+	# Calculate min/max for every day
+	for day in days_dict.values():
+		day.min_max = _calculate_min_max(day.date_fragments)
 	
-	match ret_method:
-		0: return days_groups
-		1: return days_groups_simple
-		2: return [days_groups, days_groups_simple]
-		_: return {"error": "Return method not available"}
+		days.append(day)
+	
+	var days_array: Array[Day] = []
+	for y in days_dict.values():
+		days_array.append(y)
+		
+	return days_array
+
+func _calculate_min_max(fragments: Array[DateTimeFragment]) -> Vector2:
+	var min_temp: float = INF
+	var max_temp: float = INF
+	
+	var temps_array: Array = []
+	
+	for fragment in fragments:
+		temps_array.append(fragment.temperature)
+	
+	min_temp = temps_array.min()
+	max_temp = temps_array.max()
+	
+	return Vector2(min_temp, max_temp)
+
+func get_frequent(numbers: Array) -> int:
+	var counts = {}
+	var most_frequent_num = null
+	var max_count = 0
+	
+	for num in numbers:
+		if counts.has(num):
+			counts[num] += 1
+		else:
+			counts[num] = 1
+	
+	for i in counts:
+		if counts[i] > max_count:
+			most_frequent_num = i
+			max_count = counts[i]
+
+	return most_frequent_num
 
 
-func _instantiate_panels(simple_data: Dictionary):
+func _instantiate_panels(data: Array[Day]):
 	var bpd: PackedScene = load("res:///resources/scenes/ui/weather_app/basic_panel_day.tscn")
 	
-	for item in simple_data.keys():
+	for day in data:
 		var z = $BackPanel/LeftContainers/BaseContainers/HBoxContainer
 		
 		var current_panel = bpd.instantiate()
-		var sd_content: Dictionary = simple_data[item]
 		var bg_color: Color = Color("76c1e0")
 	
-		current_panel.min_max_degrees = Vector2(sd_content["minimum"], sd_content["maximum"])
+		current_panel.min_max_degrees = day.min_max
 		current_panel.set_background_color(bg_color)
 		
+		var codes: Array = []
+		
+		for frag in day.date_fragments:
+			codes.append(frag.weather_code)
+		
+		var dom: int = get_frequent(codes)
+		var code_tranlation: Dictionary = search_code(dom)
+		
+		
 		z.add_child(current_panel)
+		current_panel.update_central_label(code_tranlation["day"]["description"])
 		current_panel.update_dg(temperature_unit)
 
 

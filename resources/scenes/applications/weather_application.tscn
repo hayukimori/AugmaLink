@@ -126,9 +126,9 @@ offset_bottom = 400.12
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0ya63")
-sample_json = "res://resources/api_fake_responses/open_meteo_brasilia.json"
-sample_url = "https://api.open-meteo.com/v1/forecast?latitude=-15.7797&longitude=-47.9297&current=temperature_2m&hourly=temperature_2m&timezone=America%2FSao_Paulo"
-load_fake_response = true
+sample_json = "res://resources/api_fake_responses/open_meteo_brasilia_with_codes.json"
+weather_codes_json = "res://resources/fundamentals_open_weather_api/code_interpretation.json"
+sample_url = "https://api.open-meteo.com/v1/forecast?latitude=-15.7797&longitude=-47.9297&current=temperature_2m,precipitation,weather_code&hourly=temperature_2m,rain,weather_code"
 
 [node name="BackPanel" type="Panel" parent="."]
 layout_mode = 1
