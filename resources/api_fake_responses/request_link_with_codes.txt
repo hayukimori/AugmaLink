@@ -1,0 +1,1 @@
+https://api.open-meteo.com/v1/forecast?latitude=-15.7797&longitude=-47.9297&current=temperature_2m,precipitation,weather_code&hourly=temperature_2m,rain,weather_code
