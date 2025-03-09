@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://byvlxl4otpxj0"]
+[gd_scene load_steps=2 format=3 uid="uid://byvlxl4otpxj0"]
 
-[ext_resource type="PackedScene" uid="uid://day3j3tq5r6hr" path="res://resources/scenes/ui/notification_manager/side_noitification.tscn" id="1_gtsqa"]
 [ext_resource type="Script" path="res://resources/scripts/notification_manager/notification_area.gd" id="1_gyjt6"]
 
 [node name="NotificationArea" type="Control"]
@@ -28,6 +27,3 @@ offset_right = 1.8559
 offset_bottom = 0.085022
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Noitification" parent="NotificationsList" instance=ExtResource("1_gtsqa")]
-layout_mode = 2

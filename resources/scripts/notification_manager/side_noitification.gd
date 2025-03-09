@@ -8,7 +8,7 @@ extends Button
 
 
 func _ready() -> void:
-	self.text = content
+	text = content
 	
 	if application_icon != null:
 		left_icon_btn.icon = application_icon

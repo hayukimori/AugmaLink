@@ -48,7 +48,7 @@ frequency = 0.0006
 color_ramp = SubResource("Gradient_vnqm5")
 noise = SubResource("FastNoiseLite_vwn17")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvu2x"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u2qb4"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 anti_aliasing = false
@@ -317,7 +317,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_vvu2x")
+theme_override_styles/panel = SubResource("StyleBoxFlat_u2qb4")
 script = ExtResource("2_ky8m2")
 radius_bottom_left = 0
 radius_bottom_right = 0
