@@ -2,10 +2,17 @@ extends Control
 
 var now = Time.get_time_dict_from_system()
 
-@onready var time_label: Label = $UIBasic/TextureRect2/Label
+@onready var time_label: Label = $UIBasic/TopTexture/Label
 @onready var timer = $Timer
-@onready var applications_bottom_menu: Control = $UIBasic/TextureRect/ApplicationsBottomMenu
+@onready var applications_bottom_menu: Control = $UIBasic/BottomTexture/ApplicationsBottomMenu
 @onready var application_on_top: Control = $ApplicationOnTop
+@onready var theme_pivot: Panel = $ThemePivot
+@onready var microphone_btn: Button = $UIBasic/TopTexture/TopOptions/MicrophoneBtn
+@onready var options_btn: Button = $UIBasic/TopTexture/TopOptions/OptionsBtn
+
+@export_category("User Interface Settings")
+@export var MainUserColor: Color
+@export_file("*.tres") var buttons_theme_file: String = ""
 
 
 # TEST: This is an array to keep currently running applications
@@ -15,6 +22,7 @@ var current_flags: Array[String] = []
 func _ready():
 	timer.timeout.connect(_update_time)
 	_update_time()
+	_update_current_main_color(MainUserColor)
 	
 
 func _update_time():
@@ -22,6 +30,22 @@ func _update_time():
 	var text_now = "%02d:%02d" % [now["hour"], now["minute"]]
 	time_label.text = text_now
 
+
+func _update_current_main_color(target_color: Color) -> void:
+	# Get current theme
+	var current_theme: Theme = load(buttons_theme_file)
+	var sb: StyleBoxFlat = current_theme.get_stylebox("normal", "Button")
+
+	# Update buttons shadows
+	if sb is StyleBoxFlat:
+		var new_sb = sb.duplicate() as StyleBoxFlat
+		new_sb.shadow_color = target_color
+		current_theme.set_stylebox("normal", "Button", new_sb)
+	
+	microphone_btn.add_theme_color_override("icon_normal_color", target_color)
+	options_btn.add_theme_color_override("icon_normal_color", target_color)
+	
+	
 
 func update_flags():
 	for flag in current_flags:
