@@ -64,6 +64,7 @@ Some icons for this project were found on Google Fonts, and the icons related to
 ![icon1](assets/textures/icons/chat_app_icon_sao_os.png)
 ![icon2](assets/textures/icons/map_icon_sao_os.png)
 ![icon3](assets/textures/icons/music_player_icon_sao_os.png)
+![icon4](assets/textures/icons/weather_icon_sao_os.png)
 
 these are some examples of what inkscape can do.
 <br>
