@@ -29,7 +29,7 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 shadow_color = Color(0.545098, 0.156863, 0.156863, 0.6)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a24or"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ucepb"]
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_detail = 20
@@ -85,9 +85,6 @@ offset_top = -241.0
 offset_right = 499.304
 offset_bottom = 273.0
 script = ExtResource("1_21gti")
-host = "192.168.1.6"
-topic = "redot/messages_another_client"
-sending_messages_topic = "redot/messages_my_client"
 
 [node name="MQTT" parent="." instance=ExtResource("8_2exw2")]
 
@@ -159,7 +156,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_a24or")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ucepb")
 script = ExtResource("2_k7k3w")
 corner_detail = 60
 radius_bottom_left = 0
