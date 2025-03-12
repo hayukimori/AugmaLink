@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bnupu60e7uar3"]
+[gd_scene load_steps=22 format=3 uid="uid://bnupu60e7uar3"]
 
 [ext_resource type="Script" path="res://resources/scripts/message_app/chat_application.gd" id="1_21gti"]
 [ext_resource type="Script" path="res://addons/TextureRectRounded/TextureRectRounded.gd" id="2_k7k3w"]
@@ -7,7 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://vovm1vsehl5j" path="res://assets/textures/icons/remove.png" id="5_s7pm7"]
 [ext_resource type="Texture2D" uid="uid://c4w4c213i1hev" path="res://assets/textures/icons/arrow_forward.png" id="6_qwwcb"]
 [ext_resource type="StyleBox" uid="uid://t5kfrqcuukfh" path="res://resources/materials/input_text_lineedit.tres" id="7_6r05r"]
+[ext_resource type="StyleBox" uid="uid://bnng3jjig3one" path="res://resources/aside_assets/white_rounded_stylebox_flat.tres" id="7_p87xg"]
 [ext_resource type="PackedScene" uid="uid://ktm7k0co2o7l" path="res://addons/mqtt/mqtt.tscn" id="8_2exw2"]
+[ext_resource type="StyleBox" uid="uid://bbppiomks1dr1" path="res://resources/aside_assets/blue_rounded_stylebox_flat.tres" id="8_5qbkb"]
+[ext_resource type="Texture2D" uid="uid://cjldgekfxajsl" path="res://assets/textures/icons/link_icon_google.png" id="11_e7pri"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6r4f"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -29,7 +32,7 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 shadow_color = Color(0.545098, 0.156863, 0.156863, 0.6)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ucepb"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duhqu"]
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_detail = 20
@@ -54,25 +57,14 @@ font = SubResource("SystemFont_q30d4")
 font_size = 12
 font_color = Color(0.314316, 0.314316, 0.314316, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7kem"]
-bg_color = Color(1, 1, 1, 0.835294)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgenn"]
-content_margin_left = 1.0
-bg_color = Color(0.34902, 0.6, 0.964706, 0.737255)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
-
 [sub_resource type="SystemFont" id="SystemFont_46r0l"]
 font_names = PackedStringArray("Cantarell")
 font_weight = 100
 subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_hevxr"]
+font_names = PackedStringArray("Cantarell")
+font_weight = 100
 
 [node name="ChatApplication" type="Control"]
 layout_mode = 3
@@ -156,7 +148,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ucepb")
+theme_override_styles/panel = SubResource("StyleBoxFlat_duhqu")
 script = ExtResource("2_k7k3w")
 corner_detail = 60
 radius_bottom_left = 0
@@ -232,7 +224,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_c7kem")
+theme_override_styles/panel = ExtResource("7_p87xg")
 
 [node name="Send" type="Button" parent="TextInputArea/Panel"]
 layout_mode = 1
@@ -248,7 +240,7 @@ offset_bottom = 17.5
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/icon_max_width = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_lgenn")
+theme_override_styles/normal = ExtResource("8_5qbkb")
 text = "        "
 icon = ExtResource("6_qwwcb")
 icon_alignment = 1
@@ -277,12 +269,29 @@ flat = true
 caret_blink = true
 
 [node name="nickname" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 13.0
-offset_top = 473.0
-offset_right = 253.0
-offset_bottom = 504.0
-placeholder_text = "Nickname"
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013
+anchor_top = 0.759
+anchor_right = 0.013
+anchor_bottom = 0.759
+offset_left = 9.026
+offset_top = -0.126038
+offset_right = 249.026
+offset_bottom = 42.874
+theme_override_colors/selection_color = Color(0.121569, 0.121569, 0.388235, 1)
+theme_override_colors/caret_color = Color(0.211765, 0.211765, 0.211765, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0.690196)
+theme_override_colors/font_outline_color = Color(0.211765, 0.211765, 0.211765, 1)
+theme_override_colors/font_selected_color = Color(0.582376, 0.582376, 0.582376, 0.690196)
+theme_override_colors/font_uneditable_color = Color(0, 0, 0, 0.690196)
+theme_override_colors/font_color = Color(0, 0, 0, 0.690196)
+theme_override_fonts/font = SubResource("SystemFont_hevxr")
+theme_override_styles/focus = ExtResource("7_p87xg")
+theme_override_styles/normal = ExtResource("7_p87xg")
+placeholder_text = "@nickname"
+alignment = 1
+max_length = 25
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
@@ -293,17 +302,21 @@ autostart = true
 [node name="connect_btn" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.813
-anchor_top = 0.92
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -0.373901
-offset_top = 0.120056
-offset_right = 0.00012207
-offset_bottom = 6.10352e-05
+anchor_left = 0.022
+anchor_top = 0.77
+anchor_right = 0.022
+anchor_bottom = 0.77
+offset_left = 198.044
+offset_top = 0.219971
+offset_right = 232.044
+offset_bottom = 31.22
 grow_horizontal = 0
 grow_vertical = 0
-text = "CONNECT"
+theme_override_constants/icon_max_width = 25
+theme_override_styles/normal = ExtResource("8_5qbkb")
+icon = ExtResource("11_e7pri")
+icon_alignment = 1
+expand_icon = true
 
 [connection signal="broker_connected" from="MQTT" to="." method="_on_mqtt_broker_connected"]
 [connection signal="broker_connection_failed" from="MQTT" to="." method="_on_mqtt_broker_connection_failed"]
