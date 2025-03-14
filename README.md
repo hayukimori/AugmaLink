@@ -27,7 +27,7 @@ To connect to the server, edit the "Nickname" and click "Connect" to start `mosq
 
 
 
-![gif](readme_demos/demo_1.gif)
+![Chat Application Preview](readme_demos/chat_application_preview.png)
 
 
 

@@ -84,7 +84,8 @@ func get_data(custom_response: Dictionary) -> void:
 
 
 	var dates_data: Array[Day] = new_process_weather_data(timestamps, temperatures, list_weather_codes)
-
+	print(response)
+	
 	update_central_card(response, dates_data)
 	
 	create_baselines(dates_data)
@@ -113,9 +114,9 @@ func update_central_card(main_response: Dictionary, dates: Array[Day]) -> void:
 
 
 
-func set_min_max_dg(data: Array[Day], date_string: String, label_max: Label, label_min: Label):
-	
+func set_min_max_dg(data: Array[Day], date_string: String, label_max: Label, label_min: Label):	
 	var date_data: Day = match_date(data, date_string)
+	print(date_string)
 
 	var mi_dg: float = date_data.min_max.x
 	var ma_dg: float = date_data.min_max.y
