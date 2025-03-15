@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bigfivinarnf0"]
+
+[sub_resource type="SystemFont" id="SystemFont_uyhrs"]
+font_names = PackedStringArray("Cantarell")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82jyp"]
+bg_color = Color(1, 1, 1, 0)
+
+[resource]
+LineEdit/colors/font_color = Color(0.145098, 0.145098, 0.145098, 1)
+LineEdit/colors/font_placeholder_color = Color(0.211765, 0.211765, 0.211765, 0.635294)
+LineEdit/fonts/font = SubResource("SystemFont_uyhrs")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_82jyp")

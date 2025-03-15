@@ -3,6 +3,9 @@
 [ext_resource type="Script" path="res://resources/scripts/user_settings_application/user_register_screeen.gd" id="1_o4rll"]
 [ext_resource type="Script" path="res://addons/TextureRectRounded/TextureRectRounded.gd" id="1_p61tx"]
 [ext_resource type="Texture2D" uid="uid://q73ys8p2o8ec" path="res://assets/textures/temp_user_image.jpg" id="2_g3t7t"]
+[ext_resource type="Texture2D" uid="uid://b34myubl0vp6b" path="res://assets/textures/icons/edit_google.png" id="4_s0ybp"]
+[ext_resource type="Theme" uid="uid://bigfivinarnf0" path="res://resources/themes/user_settings_basic.tres" id="5_g6rai"]
+[ext_resource type="Texture2D" uid="uid://dhtnnamctm1gx" path="res://assets/textures/icons/check_google.png" id="6_6lo2u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkdug"]
 bg_color = Color(1, 1, 1, 1)
@@ -43,18 +46,6 @@ font_names = PackedStringArray("Libre Barcode 39")
 font = SubResource("SystemFont_p7db7")
 font_color = Color(0.145266, 0.145266, 0.145266, 1)
 
-[sub_resource type="SystemFont" id="SystemFont_uyhrs"]
-font_names = PackedStringArray("Cantarell")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82jyp"]
-bg_color = Color(1, 1, 1, 0)
-
-[sub_resource type="SystemFont" id="SystemFont_nom7k"]
-font_names = PackedStringArray("Cantarell")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1b0id"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6rh1"]
 bg_color = Color(0.831373, 0.129412, 0.109804, 1)
 border_width_left = 15
@@ -65,6 +56,13 @@ border_color = Color(0.831373, 0.129412, 0.109804, 1)
 border_blend = true
 corner_radius_top_left = 16
 corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8pbg"]
+bg_color = Color(0.831373, 0.129412, 0.109804, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
 
 [node name="UserRegisterScreen" type="Control"]
 layout_mode = 3
@@ -105,9 +103,9 @@ vertical_alignment = 1
 [node name="UserPictureTextureRounded" type="Panel" parent="."]
 clip_children = 1
 layout_mode = 0
-offset_left = 347.0
+offset_left = 345.0
 offset_top = 140.0
-offset_right = 447.0
+offset_right = 445.0
 offset_bottom = 240.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a4pje")
 script = ExtResource("1_p61tx")
@@ -122,17 +120,26 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 347.0
+offset_left = 346.0
 offset_top = 140.0
-offset_right = -343.0
+offset_right = -344.0
 offset_bottom = -208.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 25
 theme_override_styles/focus = SubResource("StyleBoxFlat_0uvg8")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0uvg8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_0uvg8")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0uvg8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jmiel")
+icon = ExtResource("4_s0ybp")
+icon_alignment = 1
+expand_icon = true
 
 [node name="UUIDLeftBarLabel" type="Label" parent="."]
 layout_mode = 1
@@ -162,11 +169,8 @@ offset_top = 263.0
 offset_right = 167.0
 offset_bottom = 294.0
 grow_horizontal = 2
-theme_override_colors/font_placeholder_color = Color(0.145098, 0.145098, 0.145098, 1)
-theme_override_colors/font_color = Color(0.145098, 0.145098, 0.145098, 1)
-theme_override_fonts/font = SubResource("SystemFont_uyhrs")
-theme_override_styles/normal = SubResource("StyleBoxFlat_82jyp")
-placeholder_text = "DisplayName"
+theme = ExtResource("5_g6rai")
+placeholder_text = "Click to set Display Name"
 alignment = 1
 
 [node name="NickNameLineEdit" type="LineEdit" parent="."]
@@ -174,17 +178,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -164.0
+offset_left = -167.0
 offset_top = 290.0
-offset_right = 170.0
+offset_right = 167.0
 offset_bottom = 321.0
 grow_horizontal = 2
-theme_override_colors/font_placeholder_color = Color(0.145098, 0.145098, 0.145098, 1)
-theme_override_colors/font_color = Color(0.145098, 0.145098, 0.145098, 1)
-theme_override_fonts/font = SubResource("SystemFont_nom7k")
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_1b0id")
-placeholder_text = "@nickname"
+theme = ExtResource("5_g6rai")
+placeholder_text = "Click to change @nickname"
 alignment = 1
 
 [node name="AccentColorPicker" type="ColorPickerButton" parent="."]
@@ -205,4 +205,23 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_o6rh1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_o6rh1")
 color = Color(0.831373, 0.129412, 0.109804, 1)
 
+[node name="DoneBtn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -78.0
+offset_top = 12.0
+offset_right = -14.0
+offset_bottom = 36.0
+grow_horizontal = 0
+theme_override_styles/focus = SubResource("StyleBoxFlat_m8pbg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m8pbg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_m8pbg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_m8pbg")
+icon = ExtResource("6_6lo2u")
+icon_alignment = 1
+expand_icon = true
+
 [connection signal="color_changed" from="AccentColorPicker" to="." method="_on_accent_color_picker_color_changed"]
+[connection signal="pressed" from="DoneBtn" to="." method="_on_done_btn_pressed"]
