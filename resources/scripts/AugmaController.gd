@@ -21,9 +21,29 @@ var current_flags: Array[String] = []
 
 func _ready():
 	timer.timeout.connect(_update_time)
+
+	user_loader()
 	_update_time()
 	_update_current_main_color(MainUserColor)
+
+func user_loader() -> void:
+	if user_exists():
+		print("User already exists, loading user settings...")
+	else:
+		save_user()
+
+
+func user_exists() -> bool:
+	return FileAccess.file_exists("user://current_user.tres")
 	
+
+func save_user() -> void:
+	var udata = UserSettings.new()
+	udata.name = "Hayukimori"
+	udata.uid = "41d88720-c0d1-4570-a845-feba3f083201"
+
+	ResourceSaver.save(udata, "user://current_user.tres")
+	print(OS.get_data_dir())
 
 func _update_time():
 	now = Time.get_time_dict_from_system()
@@ -44,7 +64,6 @@ func _update_current_main_color(target_color: Color) -> void:
 	
 	microphone_btn.add_theme_color_override("icon_normal_color", target_color)
 	options_btn.add_theme_color_override("icon_normal_color", target_color)
-	
 	
 
 func update_flags():

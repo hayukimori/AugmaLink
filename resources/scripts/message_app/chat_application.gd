@@ -15,17 +15,39 @@ var message_right: PackedScene = load("res://resources/scenes/ui/message_app/mes
 @export var port: int = 1883
 @export var topic: String = "redot/examplechatroom"
 
+@export_category("Chat Current Settings")
+@export var target_user: String = "人"
+@export var target_userID: String = "@none"
+
 #@onready var mqtt = $MQTT
 @onready var messages_container: VBoxContainer = $Panel/ScrollContainer/MessagesContainer
 @onready var scroll_container: ScrollContainer = $Panel/ScrollContainer
 @onready var message_input_line_edit: LineEdit = $TextInputArea/Panel/MessageInput_LineEdit
+@onready var titlebar_label: Label = $TitleBar/WindowTitleLabel
 @onready var send_button: Button = $TextInputArea/Panel/Send
 @onready var nickname: LineEdit = $nickname
 
 var start_server_calls: bool = false
 
 
-func add_message(message: Control):
+func _ready() -> void:
+	
+	# Connect signal to func _on_mqtt_received_message
+	$MQTT.received_message.connect(_on_mqtt_received_message)
+	print("Connected to _on_mqtt_received_message")
+
+	_update_titlebar(false)
+
+
+func _update_titlebar(connected_to_user: bool = false) -> void:
+	if connected_to_user:
+		titlebar_label.text = target_user
+	else:
+		titlebar_label.text = "App"
+		
+
+
+func add_message(message: Control) -> void:
 	messages_container.add_child(message)
 	await get_tree().process_frame
 
@@ -36,21 +58,14 @@ func add_message(message: Control):
 	tween.tween_property(scroll_container, "scroll_vertical", scroll_container.get_v_scroll_bar().max_value, 0.3)
 
 
-func _ready():
-	# Connect signal to func _on_mqtt_received_message
-	$MQTT.received_message.connect(_on_mqtt_received_message)
-	print("Connected to _on_mqtt_received_message")
-
-
-
-func load_message_received(message_text):
+func load_message_received(message_text) -> void:
 	# Instantiates a message scene (left side)
 	var target_scene = message_left.instantiate()
 	target_scene.message_text = message_text
 	add_message(target_scene)
 
 
-func load_message_send(message_text):
+func load_message_send(message_text) -> void:
 	# Instantiates a message scene (right side)
 	var target_scene = message_right.instantiate()
 	target_scene.message_text = message_text
@@ -69,11 +84,11 @@ func _on_message_input_line_edit_text_submitted(new_text: String):
 	message_input_line_edit.clear()
 
 
-func _on_quit_button_pressed():
+func _on_quit_button_pressed() -> void:
 	queue_free()
 
 
-func send_message_mqtt(message: String):
+func send_message_mqtt(message: String) -> void:
 	# Convers message to JSON/Dict format
 	var message_dict: Dictionary = {
 		"user_id": nickname.text,
@@ -86,7 +101,7 @@ func send_message_mqtt(message: String):
 
 
 
-func connect_mqtt():
+func connect_mqtt() -> void:
 	# Create a random client id to connect mqtt server
 	randomize()
 	$MQTT.client_id = "s%d" % randi()
@@ -113,18 +128,21 @@ func connect_mqtt():
 ##################################################
 ################ DEBUG SINGALS ###################
 ##################################################
-func _on_mqtt_broker_connected():
+func _on_mqtt_broker_connected() -> void:
 	print("Broker connected")
 
-func _on_mqtt_broker_connection_failed():
+	#TODO: Move this section to other format
+	_update_titlebar(true)
+
+func _on_mqtt_broker_connection_failed() -> void:
 	printerr("Fail to connect to broker")
 
-func _on_mqtt_broker_disconnected():
+func _on_mqtt_broker_disconnected() -> void:
 	print("Broker disconnected.")
 ##################################################
 
 
-func _on_mqtt_received_message(current_topic, message):
+func _on_mqtt_received_message(current_topic, message) -> void:
 	print("received message on topic: ", current_topic)
 	print(current_topic, message)
 
@@ -136,5 +154,5 @@ func _on_mqtt_received_message(current_topic, message):
 		append_message_to_chat(msg_as_dict)
 	
 
-func _on_connect_btn_pressed():
+func _on_connect_btn_pressed() -> void:
 	connect_mqtt()

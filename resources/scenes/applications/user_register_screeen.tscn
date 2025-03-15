@@ -1,0 +1,208 @@
+[gd_scene load_steps=17 format=3 uid="uid://xb5blarg57d4"]
+
+[ext_resource type="Script" path="res://resources/scripts/user_settings_application/user_register_screeen.gd" id="1_o4rll"]
+[ext_resource type="Script" path="res://addons/TextureRectRounded/TextureRectRounded.gd" id="1_p61tx"]
+[ext_resource type="Texture2D" uid="uid://q73ys8p2o8ec" path="res://assets/textures/temp_user_image.jpg" id="2_g3t7t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkdug"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="SystemFont" id="SystemFont_aif1q"]
+font_names = PackedStringArray("Cantarell")
+
+[sub_resource type="LabelSettings" id="LabelSettings_e2vkb"]
+font = SubResource("SystemFont_aif1q")
+font_size = 18
+font_color = Color(0.145266, 0.145266, 0.145266, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a4pje"]
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uvg8"]
+bg_color = Color(0.0240298, 0.0240298, 0.0240298, 0.156863)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmiel"]
+bg_color = Color(0.6, 0.6, 0.6, 0.0196078)
+
+[sub_resource type="SystemFont" id="SystemFont_p7db7"]
+font_names = PackedStringArray("Libre Barcode 39")
+
+[sub_resource type="LabelSettings" id="LabelSettings_yjeh2"]
+font = SubResource("SystemFont_p7db7")
+font_color = Color(0.145266, 0.145266, 0.145266, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_uyhrs"]
+font_names = PackedStringArray("Cantarell")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82jyp"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="SystemFont" id="SystemFont_nom7k"]
+font_names = PackedStringArray("Cantarell")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1b0id"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6rh1"]
+bg_color = Color(0.831373, 0.129412, 0.109804, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.831373, 0.129412, 0.109804, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_bottom_left = 16
+
+[node name="UserRegisterScreen" type="Control"]
+layout_mode = 3
+anchor_left = 0.157
+anchor_top = 0.128
+anchor_right = 0.157
+anchor_bottom = 0.128
+offset_left = 0.135971
+offset_top = 9.056
+offset_right = 790.136
+offset_bottom = 457.056
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o4rll")
+
+[node name="backgroundPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = -6.10352e-05
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nkdug")
+
+[node name="WindowTitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_top = 7.0
+offset_right = 791.0
+offset_bottom = 48.0
+text = "User Settings"
+label_settings = SubResource("LabelSettings_e2vkb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UserPictureTextureRounded" type="Panel" parent="."]
+clip_children = 1
+layout_mode = 0
+offset_left = 347.0
+offset_top = 140.0
+offset_right = 447.0
+offset_bottom = 240.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_a4pje")
+script = ExtResource("1_p61tx")
+radius_bottom_left = 100
+radius_bottom_right = 100
+radius_top_left = 100
+radius_top_right = 100
+texture = ExtResource("2_g3t7t")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 347.0
+offset_top = 140.0
+offset_right = -343.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_0uvg8")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0uvg8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0uvg8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0uvg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jmiel")
+
+[node name="UUIDLeftBarLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -48.0
+offset_right = 98.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 1.57079
+text = "lorem ipsum"
+label_settings = SubResource("LabelSettings_yjeh2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DisplayNameLineEdit" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -167.0
+offset_top = 263.0
+offset_right = 167.0
+offset_bottom = 294.0
+grow_horizontal = 2
+theme_override_colors/font_placeholder_color = Color(0.145098, 0.145098, 0.145098, 1)
+theme_override_colors/font_color = Color(0.145098, 0.145098, 0.145098, 1)
+theme_override_fonts/font = SubResource("SystemFont_uyhrs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_82jyp")
+placeholder_text = "DisplayName"
+alignment = 1
+
+[node name="NickNameLineEdit" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -164.0
+offset_top = 290.0
+offset_right = 170.0
+offset_bottom = 321.0
+grow_horizontal = 2
+theme_override_colors/font_placeholder_color = Color(0.145098, 0.145098, 0.145098, 1)
+theme_override_colors/font_color = Color(0.145098, 0.145098, 0.145098, 1)
+theme_override_fonts/font = SubResource("SystemFont_nom7k")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_1b0id")
+placeholder_text = "@nickname"
+alignment = 1
+
+[node name="AccentColorPicker" type="ColorPickerButton" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_right = 52.0
+offset_bottom = 449.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_o6rh1")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_o6rh1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_o6rh1")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_o6rh1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_o6rh1")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_o6rh1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o6rh1")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_o6rh1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o6rh1")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_o6rh1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_o6rh1")
+color = Color(0.831373, 0.129412, 0.109804, 1)
+
+[connection signal="color_changed" from="AccentColorPicker" to="." method="_on_accent_color_picker_color_changed"]
