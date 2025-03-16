@@ -1,5 +1,7 @@
 extends Control
 
+signal user_created_or_updated
+
 # User LE
 @onready var display_name_line_edit: LineEdit = $DisplayNameLineEdit
 @onready var nickname_line_edit: LineEdit = $NickNameLineEdit
@@ -16,6 +18,8 @@ extends Control
 @export var current_image_path: String = ""
 @export var current_image_texture: ImageTexture = ImageTexture.new()
 
+@export var default_color: Color = Color("#5177ae")
+
 
 
 var current_color: Color
@@ -23,6 +27,7 @@ var uld: UserSettingsManager.UserLocationData = UserSettingsManager.UserLocation
 
 func _ready() -> void:
 	get_user_location()
+	accent_color_picker.color = default_color
 	current_color = accent_color_picker.color
 
 
@@ -40,10 +45,11 @@ func register_user() -> void:
 		"NOUUID",
 		display_name_data, nickname_data, 
 		current_image_texture, 
-		accent_color_picker.color, 
+		current_color, 
 		uld
 	)
 
+	user_created_or_updated.emit()
 	queue_free()
 
 
@@ -54,7 +60,7 @@ func update_config_image(img_path: String) -> void:
 	user_picture_texture_rounded.texture = txt
 
 
-func _on_accent_color_picker_color_changed(color: Color) -> void:
+func update_colors(color: Color) -> void:
 	current_color = color
 	
 	var normal_stylebox: StyleBoxFlat = accent_color_picker.get_theme_stylebox("normal")
@@ -94,6 +100,9 @@ func _on_accent_color_picker_color_changed(color: Color) -> void:
 	done_btn_pressed_stylebox.bg_color = color
 	done_btn_pressed_stylebox.border_color = color
 
+
+func _on_accent_color_picker_color_changed(color: Color) -> void:
+	update_colors(color)
 
 
 func _on_done_btn_pressed() -> void:

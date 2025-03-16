@@ -135,4 +135,9 @@ active = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="WeatherManager"]
 
+[node name="UserUpdateTimer" type="Timer" parent="WeatherManager"]
+wait_time = 5.0
+autostart = true
+
 [connection signal="request_completed" from="WeatherManager/HTTPRequest" to="WeatherManager" method="_on_http_request_request_completed"]
+[connection signal="timeout" from="WeatherManager/UserUpdateTimer" to="WeatherManager" method="_on_user_update_timer_timeout"]

@@ -3,7 +3,7 @@ extends Node
 @export_category("User Settings Save")
 @export var saving_path: String = "user://user_settings.tres"
 
-var current_user: Resource = Resource.new()
+var current_user: UserSettings = UserSettings.new()
 
 class UserLocationData:
 	var city: String = "null"
@@ -21,8 +21,7 @@ func register(uuid: String, display_name: String, nickname:String, img_texture: 
 	user.picture = img_texture
 	user.accent_color = accent_color
 	
-	if local_data.city == "null":
-		user.isDataComplete = false
+	user.isDataComplete = (local_data.city != "null")
 
 	user.cityName = local_data.city
 	user.latitude = local_data.latitude
@@ -35,7 +34,7 @@ func userExists() -> bool:
 	return FileAccess.file_exists(saving_path)
 
 func loadDefaultUser() -> void:
-	current_user = ResourceLoader.load(saving_path)
+	current_user = load(saving_path)
 
 func getCurrentUser() -> UserSettings:
-	return UserSettings.new()
+	return current_user

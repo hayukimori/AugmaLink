@@ -11,7 +11,7 @@ var now = Time.get_time_dict_from_system()
 @onready var options_btn: Button = $UIBasic/TopTexture/TopOptions/OptionsBtn
 
 @export_category("User Interface Settings")
-@export var MainUserColor: Color
+@export var MainUserColor: Color = Color("#5177ae")
 @export_file("*.tres") var buttons_theme_file: String = ""
 
 # User Settings
@@ -32,18 +32,26 @@ func _ready():
 
 	_update_current_main_color(MainUserColor) # Primary color
 	user_loader()
-	var current_user = UserSettingsManager.getCurrentUser()
-	_update_current_main_color(current_user.accent_color)
+
+
 	_update_time()
 	
 
 
 func user_loader() -> void:
-	if UserSettingsManager.userExists():
-		UserSettingsManager.loadDefaultUser()
-	else:
+	if UserSettingsManager.userExists() == false:
 		var current_uss = user_settings_scene.instantiate()
 		add_child(current_uss)
+		current_uss.connect("user_created_or_updated", user_loader)
+
+	else:
+		UserSettingsManager.loadDefaultUser()
+
+		var current_user = UserSettingsManager.getCurrentUser()
+		if current_user:
+			_update_current_main_color(current_user.accent_color)
+		else:
+			print("No user loaded")
 
 
 func _update_time():
@@ -53,6 +61,7 @@ func _update_time():
 
 
 func _update_current_main_color(target_color: Color) -> void:
+	print("Applying color: ", target_color)
 	# Get current theme
 	var current_theme: Theme = load(buttons_theme_file)
 	var sb: StyleBoxFlat = current_theme.get_stylebox("normal", "Button")

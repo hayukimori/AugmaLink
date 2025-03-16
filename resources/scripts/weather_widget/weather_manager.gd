@@ -15,12 +15,15 @@ extends Node
 
 @onready var weather_widget: Control = $".."
 @onready var http_request_node = $HTTPRequest
-
+@onready var user_update_timer: Timer = $UserUpdateTimer
 
 var current_response:String
 
 func _ready():
+	reload_user()
 
+func reload_user() -> void:
+	print("Reloading user....")
 	var userData: UserSettings = UserSettingsManager.getCurrentUser()
 	if userData.isDataComplete:
 		latitude = userData.latitude
@@ -78,3 +81,7 @@ func _on_http_request_request_completed(result: int, response_code: int, _header
 	else:
 		print("Fail. Rest: ", result)
 	update_weather_widget_content()
+
+
+func _on_user_update_timer_timeout() -> void:
+	reload_user()
