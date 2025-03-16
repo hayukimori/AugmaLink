@@ -22,7 +22,7 @@ font = SubResource("SystemFont_aif1q")
 font_size = 18
 font_color = Color(0.145266, 0.145266, 0.145266, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1i8f5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_csiw6"]
 corner_radius_top_left = 100
 corner_radius_top_right = 100
 corner_radius_bottom_right = 100
@@ -113,7 +113,7 @@ offset_left = 345.0
 offset_top = 140.0
 offset_right = 445.0
 offset_bottom = 240.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_1i8f5")
+theme_override_styles/panel = SubResource("StyleBoxFlat_csiw6")
 script = ExtResource("1_p61tx")
 radius_bottom_left = 100
 radius_bottom_right = 100
