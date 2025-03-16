@@ -10,13 +10,19 @@ extends Control
 @onready var done_btn: Button = $DoneBtn
 @onready var uuid_left_bar_label = $UUIDLeftBarLabel
 
+# Labels
+@onready var location_label: Label = $LocationLabel
 
 @export var current_image_path: String = ""
 @export var current_image_texture: ImageTexture = ImageTexture.new()
 
+
+
 var current_color: Color
+var uld: UserSettingsManager.UserLocationData = UserSettingsManager.UserLocationData.new()
 
 func _ready() -> void:
+	get_user_location()
 	current_color = accent_color_picker.color
 
 
@@ -30,7 +36,13 @@ func register_user() -> void:
 		$ErrorLabel.text = "Error: Null nickname or display name"
 		return
 	
-	UserSettingsManager.register("NOUUID", display_name_data, nickname_data, current_image_texture, accent_color_picker. color, "-00.0000", "0.0000", -3)
+	UserSettingsManager.register(
+		"NOUUID", 
+		display_name_data, nickname_data, 
+		current_image_texture, 
+		accent_color_picker.color, 
+		uld
+	)
 
 
 func update_config_image(img_path: String) -> void:
@@ -119,18 +131,23 @@ func _on_request_completed(result, response_code, _headers, body):
 	if result == HTTPRequest.RESULT_SUCCESS:
 		if response_code == 200:
 			var response = body.get_string_from_utf8()
-			var json = JSON.parse_string(response)
+			var json_response = JSON.parse_string(response)
+	
+			if json_response == null:
+				print("Error getting location")
 
-	
-			if json.error != OK:
-				return null
-	
-			var location = {
-				"latitude": json.result.latitude,
-				"longitude": json.result.longitude
-			}
-		
-			print(location)
+			
+			uld.city = json_response["city"]
+			uld.latitude = str(json_response["latitude"])
+			uld.longitude = str(json_response["longitude"])
+			uld.utc_offset = str(json_response["utc_offset"])
+
+			location_label.text = "%s, %s" % [
+				json_response["city"], 
+				json_response["region_code"]
+			]
+
+
 		else:
 			print("Error code: ", response_code)
 	else:

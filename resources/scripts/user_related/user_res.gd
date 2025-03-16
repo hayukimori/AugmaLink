@@ -10,6 +10,6 @@ class_name UserSettings
 
 @export_category("User LAT_ALT")
 @export var latitude: String
-@export var altitude: String
+@export var longitude: String
 @export var cityName: String
-@export var GMT: int
+@export var utcOffset: String

@@ -24,6 +24,7 @@ func _ready():
 		print("permissions garanted")
 	else:
 		print("Permissions needed")
+
 	timer.timeout.connect(_update_time)
 
 	user_loader()
