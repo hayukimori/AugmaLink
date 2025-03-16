@@ -4,12 +4,14 @@ extends Node
 @export_category("Activation")
 @export var active: bool = false
 
+
 @export_category("Geographical")
 @export var latitude: String
 @export var longitude: String
 
 
-@onready var label: Label = $"../Panel/Panel/Label"
+@onready var temperature_label: Label = $"../OuterPanel/InnerPanel/TemperatureLabel"
+@onready var city_name_label: Label = $"../OuterPanel/InnerPanel/CityNameLabel"
 
 @onready var weather_widget: Control = $".."
 @onready var http_request_node = $HTTPRequest
@@ -18,7 +20,17 @@ extends Node
 var current_response:String
 
 func _ready():
-	get_weather()
+
+	var userData: UserSettings = UserSettingsManager.getCurrentUser()
+	if userData.isDataComplete:
+		latitude = userData.latitude
+		longitude = userData.longitude
+		city_name_label.text = userData.cityName
+
+		get_weather()
+	
+	else:
+		city_name_label.text = "No City (config)"
 
 
 func update_weather_widget_content():
@@ -29,7 +41,7 @@ func update_weather_widget_content():
 	var degrees_type: String = dict_response["current_units"]["temperature_2m"]
 	var degrees_local: String = str(int(dict_response["current"]["temperature_2m"]))
 	
-	label.text = degrees_local + "º"
+	temperature_label.text = degrees_local + degrees_type
 
 func get_weather():
 	if active == false:
@@ -55,7 +67,7 @@ func fake_response() -> String:
 	return string
 
 
-func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+func _on_http_request_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	print("request complete.")
 	if result == HTTPRequest.RESULT_SUCCESS:
 		if response_code == 200:

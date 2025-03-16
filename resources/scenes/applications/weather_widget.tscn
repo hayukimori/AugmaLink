@@ -57,7 +57,7 @@ offset_top = 0.00799561
 offset_right = 222.44
 offset_bottom = 98.008
 
-[node name="Panel" type="Panel" parent="."]
+[node name="OuterPanel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,7 +66,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gsbk7")
 
-[node name="Panel" type="Panel" parent="Panel"]
+[node name="InnerPanel" type="Panel" parent="OuterPanel"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -77,7 +77,7 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_onpmd")
 
-[node name="Label" type="Label" parent="Panel/Panel"]
+[node name="TemperatureLabel" type="Label" parent="OuterPanel/InnerPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.339
@@ -94,7 +94,7 @@ label_settings = SubResource("LabelSettings_bpvax")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="Panel/Panel"]
+[node name="CityNameLabel" type="Label" parent="OuterPanel/InnerPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.103
@@ -109,8 +109,9 @@ text = "Brasília"
 label_settings = SubResource("LabelSettings_2pwmh")
 horizontal_alignment = 1
 vertical_alignment = 1
+clip_text = true
 
-[node name="TextureRect" type="TextureRect" parent="Panel"]
+[node name="TextureRect" type="TextureRect" parent="OuterPanel"]
 modulate = Color(1, 1, 1, 0.764706)
 layout_mode = 1
 anchors_preset = -1
@@ -130,6 +131,7 @@ stretch_mode = 5
 
 [node name="WeatherManager" type="Node" parent="."]
 script = ExtResource("2_p2ffb")
+active = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="WeatherManager"]
 

@@ -37,7 +37,7 @@ func register_user() -> void:
 		return
 	
 	UserSettingsManager.register(
-		"NOUUID", 
+		"NOUUID",
 		display_name_data, nickname_data, 
 		current_image_texture, 
 		accent_color_picker.color, 

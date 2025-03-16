@@ -64,7 +64,6 @@ func new_stream():
 			print("changed art texture")
 
 func _pause_play():
-	var state = audio_stream_player.stream_paused
 	audio_stream_player.stream_paused = !audio_stream_player.stream_paused
 
 func _skip_song():

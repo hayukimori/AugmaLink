@@ -3,6 +3,8 @@ extends Node
 @export_category("User Settings Save")
 @export var saving_path: String = "user://user_settings.tres"
 
+var current_user: Resource = Resource.new()
+
 class UserLocationData:
 	var city: String = "null"
 	var latitude: String = "0.0000"
@@ -10,7 +12,7 @@ class UserLocationData:
 	var utc_offset: String = "-0000"
 
 
-func register(uuid: String, display_name: String, nickname:String, img_texture: ImageTexture, accent_color: Color, user_local_data: UserLocationData) -> void:
+func register(uuid: String, display_name: String, nickname:String, img_texture: ImageTexture, accent_color: Color, local_data: UserLocationData) -> void:
 	var user = UserSettings.new()
 
 	user.uid = uuid
@@ -18,13 +20,22 @@ func register(uuid: String, display_name: String, nickname:String, img_texture: 
 	user.display_name = display_name
 	user.picture = img_texture
 	user.accent_color = accent_color
+	
+	if local_data.city == "null":
+		user.isDataComplete = false
 
+	user.cityName = local_data.city
+	user.latitude = local_data.latitude
+	user.longitude = local_data.longitude
+	user.utcOffset = local_data.utc_offset
 
-	#ResourceSaver.save(user, saving_path)
+	ResourceSaver.save(user, saving_path)
 
-	print(uuid)
-	print(nickname)
-	print(display_name)
-	print(img_texture)
-	print(accent_color)
-	print(user_local_data)
+func userExists() -> bool:
+	return FileAccess.file_exists(saving_path)
+
+func loadDefaultUser() -> void:
+	current_user = ResourceLoader.load(saving_path)
+
+func getCurrentUser() -> UserSettings:
+	return UserSettings.new()

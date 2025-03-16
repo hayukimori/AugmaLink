@@ -14,6 +14,9 @@ var now = Time.get_time_dict_from_system()
 @export var MainUserColor: Color
 @export_file("*.tres") var buttons_theme_file: String = ""
 
+# User Settings
+var user_settings_scene: PackedScene = preload("res://resources/scenes/applications/user_register_screeen.tscn")
+
 
 # TEST: This is an array to keep currently running applications
 var active_apps: Dictionary = {}
@@ -31,22 +34,14 @@ func _ready():
 	_update_time()
 	_update_current_main_color(MainUserColor)
 
+
 func user_loader() -> void:
-	if user_exists():
-		print("User already exists, loading user settings...")
+	if UserSettingsManager.userExists():
+		UserSettingsManager.loadDefaultUser()
 	else:
-		save_user()
+		var current_uss = user_settings_scene.instantiate()
+		add_child(current_uss)
 
-func user_exists() -> bool:
-	print("reading file from: %s" % OS.get_data_dir())
-	return FileAccess.file_exists("user://current_user.tres")
-	
-
-func save_user() -> void:
-	var saver: PackedScene = load("res://resources/scenes/applications/user_register_screeen.tscn")
-	var saver_tmp = saver.instantiate()
-	application_on_top.add_child(saver_tmp)
-	print(OS.get_data_dir())
 
 func _update_time():
 	now = Time.get_time_dict_from_system()
