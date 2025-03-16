@@ -20,6 +20,10 @@ var active_apps: Dictionary = {}
 var current_flags: Array[String] = []
 
 func _ready():
+	if OS.request_permissions():
+		print("permissions garanted")
+	else:
+		print("Permissions needed")
 	timer.timeout.connect(_update_time)
 
 	user_loader()
@@ -32,17 +36,15 @@ func user_loader() -> void:
 	else:
 		save_user()
 
-
 func user_exists() -> bool:
+	print("reading file from: %s" % OS.get_data_dir())
 	return FileAccess.file_exists("user://current_user.tres")
 	
 
 func save_user() -> void:
-	var udata = UserSettings.new()
-	udata.name = "Hayukimori"
-	udata.uid = "41d88720-c0d1-4570-a845-feba3f083201"
-
-	ResourceSaver.save(udata, "user://current_user.tres")
+	var saver: PackedScene = load("res://resources/scenes/applications/user_register_screeen.tscn")
+	var saver_tmp = saver.instantiate()
+	application_on_top.add_child(saver_tmp)
 	print(OS.get_data_dir())
 
 func _update_time():

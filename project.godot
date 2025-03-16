@@ -22,6 +22,7 @@ boot_splash/minimum_display_time=2000
 [autoload]
 
 MusicMeta="*res://addons/MusicMeta/MusicMeta.gd"
+UserSettingsManager="*res://autoloads/UserSettingsManager.gd"
 
 [display]
 
