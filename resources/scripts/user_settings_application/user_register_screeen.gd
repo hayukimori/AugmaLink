@@ -44,6 +44,8 @@ func register_user() -> void:
 		uld
 	)
 
+	queue_free()
+
 
 func update_config_image(img_path: String) -> void:
 	var img: Image = Image.load_from_file(img_path)

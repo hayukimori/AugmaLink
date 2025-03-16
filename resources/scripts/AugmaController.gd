@@ -30,9 +30,12 @@ func _ready():
 
 	timer.timeout.connect(_update_time)
 
+	_update_current_main_color(MainUserColor) # Primary color
 	user_loader()
+	var current_user = UserSettingsManager.getCurrentUser()
+	_update_current_main_color(current_user.accent_color)
 	_update_time()
-	_update_current_main_color(MainUserColor)
+	
 
 
 func user_loader() -> void:

@@ -17,13 +17,14 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="SystemFont" id="SystemFont_aif1q"]
 font_names = PackedStringArray("Cantarell")
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_e2vkb"]
 font = SubResource("SystemFont_aif1q")
 font_size = 18
 font_color = Color(0.145266, 0.145266, 0.145266, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_306c2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8xmue"]
 corner_radius_top_left = 100
 corner_radius_top_right = 100
 corner_radius_bottom_right = 100
@@ -63,12 +64,14 @@ corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
 
 [sub_resource type="SystemFont" id="SystemFont_5uxpe"]
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_4mkrw"]
 font = SubResource("SystemFont_5uxpe")
 font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_ssckw"]
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_4cd7g"]
 font = SubResource("SystemFont_ssckw")
@@ -118,7 +121,7 @@ offset_left = 345.0
 offset_top = 140.0
 offset_right = 445.0
 offset_bottom = 240.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_306c2")
+theme_override_styles/panel = SubResource("StyleBoxFlat_8xmue")
 script = ExtResource("1_p61tx")
 radius_bottom_left = 100
 radius_bottom_right = 100
