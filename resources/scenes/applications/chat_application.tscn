@@ -32,7 +32,7 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 shadow_color = Color(0.545098, 0.156863, 0.156863, 0.6)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nejii"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrd7c"]
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_detail = 20
@@ -148,7 +148,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nejii")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wrd7c")
 script = ExtResource("2_k7k3w")
 corner_detail = 60
 radius_bottom_left = 0

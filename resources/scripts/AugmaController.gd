@@ -49,7 +49,8 @@ func user_loader() -> void:
 
 		var current_user = UserSettingsManager.getCurrentUser()
 		if current_user:
-			_update_current_main_color(current_user.accent_color)
+			var targ_color = color_to_smoke(current_user.accent_color)
+			_update_current_main_color(targ_color)
 		else:
 			print("No user loaded")
 
@@ -123,6 +124,17 @@ func unload_app(app_path: String):
 	var loaded_app = active_apps.get(app_path)[0]
 	loaded_app.queue_free()
 	active_apps.erase(app_path)
+
+
+func color_to_smoke(base_color: Color, target_alpha: float = 0.51) -> Color:
+	var rest: Color = Color()
+
+	rest.r = base_color.r
+	rest.g = base_color.g
+	rest.b = base_color.b
+	rest.a = target_alpha
+
+	return rest
 
 
 func _remove_node_from_dict(key):
