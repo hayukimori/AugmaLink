@@ -42,7 +42,9 @@ func _ready() -> void:
 		1: # LOADED
 			user = UserSettingsManager.getCurrentUser()
 			nickname.text = user.username
-			
+		4: # NO_USER
+			print("NO USER DETECTED")
+
 
 
 	
