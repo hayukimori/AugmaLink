@@ -1,9 +1,16 @@
 extends Node
 
+enum UserLoadStates { 
+	LOADING, LOADED, USER_LOAD_ERROR, 
+	NOT_READY, NO_USER
+}
+
 @export_category("User Settings Save")
 @export var saving_path: String = "user://user_settings.tres"
 
-var current_user: UserSettings = UserSettings.new()
+var current_user: UserSettings
+@export var user_load_state: UserLoadStates = UserLoadStates.NOT_READY
+
 
 class UserLocationData:
 	var city: String = "null"
@@ -30,6 +37,25 @@ func register(uuid: String, display_name: String, nickname:String, img_texture: 
 
 	ResourceSaver.save(user, saving_path)
 
+# New (Autoloader)
+func _ready() -> void:
+	print("User Settings Manager is Ready")
+	userLoader()
+
+
+func userLoader() -> void:
+	if userExists():
+		loadDefaultUser()
+		if current_user:
+			user_load_state = UserLoadStates.LOADED
+		else:
+			user_load_state = UserLoadStates.USER_LOAD_ERROR
+	else:
+		user_load_state = UserLoadStates.NO_USER
+
+
+
+# Legacy
 func userExists() -> bool:
 	return FileAccess.file_exists(saving_path)
 
@@ -38,3 +64,6 @@ func loadDefaultUser() -> void:
 
 func getCurrentUser() -> UserSettings:
 	return current_user
+
+func getCurrentLoadState() -> UserLoadStates:
+	return user_load_state

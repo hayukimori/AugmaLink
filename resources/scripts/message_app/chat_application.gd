@@ -36,6 +36,8 @@ func _ready() -> void:
 
 	_update_titlebar(false)
 
+	
+
 
 func _update_titlebar(connected_to_user: bool = false) -> void:
 	if connected_to_user:

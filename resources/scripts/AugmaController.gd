@@ -14,6 +14,7 @@ var now = Time.get_time_dict_from_system()
 @export var MainUserColor: Color = Color("#5177ae")
 @export_file("*.tres") var buttons_theme_file: String = ""
 
+
 # User Settings
 var user_settings_scene: PackedScene = preload("res://resources/scenes/applications/user_register_screeen.tscn")
 
@@ -30,29 +31,38 @@ func _ready():
 
 	timer.timeout.connect(_update_time)
 
-	_update_current_main_color(MainUserColor) # Primary color
-	user_loader()
-
-
+	_update_current_main_color(MainUserColor) # Primary color	
 	_update_time()
-	
 
+	# Get User state
+	match UserSettingsManager.getCurrentLoadState():
+		0: # LOADING
+			print("Loading")
+		1: # LOADED
+			user_settings_loader()
+		2: # USER_LOAD_ERROR
+			print("User Load error")
+		3: # NOT_READY
+			print("User loader not ready")
+		4: # NO_USER
+			create_new_user()
+		_:
+			print("No state")
 
-func user_loader() -> void:
-	if UserSettingsManager.userExists() == false:
-		var current_uss = user_settings_scene.instantiate()
-		add_child(current_uss)
-		current_uss.connect("user_created_or_updated", user_loader)
-
+			
+func user_settings_loader() -> void:
+	var current_user = UserSettingsManager.getCurrentUser()
+	if current_user:
+		var targ_color = color_to_smoke(current_user.accent_color)
+		_update_current_main_color(targ_color)
 	else:
-		UserSettingsManager.loadDefaultUser()
+		print("No user loaded")
 
-		var current_user = UserSettingsManager.getCurrentUser()
-		if current_user:
-			var targ_color = color_to_smoke(current_user.accent_color)
-			_update_current_main_color(targ_color)
-		else:
-			print("No user loaded")
+
+func create_new_user() -> void:
+	var current_uss = user_settings_scene.instantiate()
+	add_child(current_uss)
+	current_uss.connect("user_created_or_updated", user_settings_loader)
 
 
 func _update_time():
