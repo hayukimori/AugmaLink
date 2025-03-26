@@ -111,15 +111,21 @@ func _on_done_btn_pressed() -> void:
 
 
 func _on_open_file_picture_pressed() -> void:
+
+	var current_running_system = OS.get_name()
+
 	var dialog = FileDialog.new()
 	dialog.set_file_mode(FileDialog.FILE_MODE_OPEN_FILE)
 	dialog.set_access(FileDialog.ACCESS_FILESYSTEM)
 	dialog.access = FileDialog.ACCESS_FILESYSTEM
-	dialog.root_subfolder = "/storage/emulated/0"
+	if current_running_system == "Android":
+		dialog.root_subfolder = "/storage/emulated/0"
+
 	dialog.set_use_native_dialog(true)
 	dialog.connect("file_selected", _on_file_selected)
 	add_child(dialog)
 	dialog.popup_centered_ratio()
+
 
 
 func _on_file_selected(path: String) -> void:
@@ -127,7 +133,6 @@ func _on_file_selected(path: String) -> void:
 		current_image_path = path
 	
 	update_config_image(current_image_path)
-
 
 
 func get_user_location():

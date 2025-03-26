@@ -220,7 +220,7 @@ expand_icon = true
 [node name="WeatherWidget" parent="." instance=ExtResource("12_wey2v")]
 layout_mode = 1
 
-[node name="NotificationArea" parent="." instance=ExtResource("13_xcf7u")]
+[node name="NotificationArea" parent="." groups=["notification_essentials"] instance=ExtResource("13_xcf7u")]
 layout_mode = 1
 
 [node name="ApplicationOnTop" type="Control" parent="."]

@@ -55,6 +55,14 @@ func user_settings_loader() -> void:
 	if current_user:
 		var targ_color = color_to_smoke(current_user.accent_color)
 		_update_current_main_color(targ_color)
+
+		NotificationController.new_notification(
+			"AugmaController",
+			current_user.picture,
+			"Welcome, %s" % current_user.display_name,
+			true
+		)
+
 	else:
 		print("No user loaded")
 

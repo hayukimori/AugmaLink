@@ -44,9 +44,6 @@ func _ready() -> void:
 			nickname.text = user.username
 		4: # NO_USER
 			print("NO USER DETECTED")
-
-
-
 	
 
 func _update_titlebar(connected_to_user: bool = false) -> void:

@@ -23,6 +23,7 @@ boot_splash/minimum_display_time=2000
 
 MusicMeta="*res://addons/MusicMeta/MusicMeta.gd"
 UserSettingsManager="*res://autoloads/UserSettingsManager.gd"
+NotificationController="*res://autoloads/NotificationController.gd"
 
 [display]
 
@@ -52,6 +53,7 @@ folder_colors={
 
 current_top_app=""
 global_controller=""
+notification_essentials=""
 
 [gui]
 
