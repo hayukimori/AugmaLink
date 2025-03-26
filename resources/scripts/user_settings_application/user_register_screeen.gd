@@ -49,6 +49,7 @@ func register_user() -> void:
 		uld
 	)
 
+	UserSettingsManager.userLoader()
 	user_created_or_updated.emit()
 	queue_free()
 

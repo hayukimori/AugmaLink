@@ -20,7 +20,7 @@ extends Node
 var current_response:String
 
 func _ready():
-	reload_user()
+	pass
 
 func reload_user() -> void:
 	print("Reloading user....")
@@ -84,4 +84,5 @@ func _on_http_request_request_completed(result: int, response_code: int, _header
 
 
 func _on_user_update_timer_timeout() -> void:
-	reload_user()
+	if UserSettingsManager.getCurrentLoadState() == 1:
+		reload_user()
