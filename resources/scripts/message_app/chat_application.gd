@@ -26,6 +26,7 @@ var message_right: PackedScene = load("res://resources/scenes/ui/message_app/mes
 @onready var nickname: LineEdit = $nickname
 
 var start_server_calls: bool = false
+var user: UserSettings
 
 
 func _ready() -> void:
@@ -36,8 +37,15 @@ func _ready() -> void:
 
 	_update_titlebar(false)
 
-	
 
+	match UserSettingsManager.getCurrentLoadState():
+		1: # LOADED
+			user = UserSettingsManager.getCurrentUser()
+			nickname.text = user.username
+			
+
+
+	
 
 func _update_titlebar(connected_to_user: bool = false) -> void:
 	if connected_to_user:
