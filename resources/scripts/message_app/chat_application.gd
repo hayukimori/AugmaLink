@@ -5,21 +5,19 @@ extends Control
 var message_left: PackedScene = load("res://resources/scenes/ui/message_app/message_left.tscn")
 var message_right: PackedScene = load("res://resources/scenes/ui/message_app/message_right.tscn")
 
-#enum ConnectionProtocols {TCP, WS}
-
-
+# Connection variables (editor level) to Mosquitto Server
 @export_category("Mosquitto Connection")
-#@export var current_connection_protocol: ConnectionProtocols
 @export_enum("tcp://", "wss://") var connection_protocol: String = "tcp://"
 @export var host: String = "localhost"
 @export var port: int = 1883
 @export var topic: String = "redot/examplechatroom"
 
+# Chat Settings (it changes at runtime)
 @export_category("Chat Current Settings")
 @export var target_user: String = "人"
 @export var target_userID: String = "@none"
 
-#@onready var mqtt = $MQTT
+# Scene nodes
 @onready var messages_container: VBoxContainer = $Panel/ScrollContainer/MessagesContainer
 @onready var scroll_container: ScrollContainer = $Panel/ScrollContainer
 @onready var message_input_line_edit: LineEdit = $TextInputArea/Panel/MessageInput_LineEdit
