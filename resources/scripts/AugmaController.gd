@@ -56,9 +56,12 @@ func user_settings_loader() -> void:
 		var targ_color = color_to_smoke(current_user.accent_color)
 		_update_current_main_color(targ_color)
 
+
+		var user_image: ImageTexture = UserSettingsManager.getUserImageTexture()
+
 		NotificationController.new_notification(
 			"AugmaController",
-			current_user.picture,
+			user_image,
 			"Welcome, %s" % current_user.display_name,
 			true
 		)

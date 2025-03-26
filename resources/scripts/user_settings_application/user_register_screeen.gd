@@ -24,14 +24,19 @@ signal user_created_or_updated
 
 var current_color: Color
 var uld: UserSettingsManager.UserLocationData = UserSettingsManager.UserLocationData.new()
+var current_image_buffer: PackedByteArray = []
+
+var img: Image
 
 func _ready() -> void:
+	update_image_buffer()
 	get_user_location()
 	accent_color_picker.color = default_color
 	current_color = accent_color_picker.color
 
 
 func register_user() -> void:
+
 	var nickname_data: String = nickname_line_edit.text
 	var display_name_data: String = display_name_line_edit.text
 
@@ -43,8 +48,8 @@ func register_user() -> void:
 	
 	UserSettingsManager.register(
 		"NOUUID",
-		display_name_data, nickname_data, 
-		current_image_texture, 
+		display_name_data, nickname_data,
+		img,
 		current_color, 
 		uld
 	)
@@ -55,11 +60,19 @@ func register_user() -> void:
 
 
 func update_config_image(img_path: String) -> void:
-	var img: Image = Image.load_from_file(img_path)
-	var txt = ImageTexture.create_from_image(img)
+	var t_img: Image = Image.load_from_file(img_path)
+	var txt = ImageTexture.create_from_image(t_img)
 
 	user_picture_texture_rounded.texture = txt
+	update_image_buffer()
 
+
+func update_image_buffer() -> void:
+	var current_img_texture = user_picture_texture_rounded.texture
+	img = current_img_texture.get_image()
+	var img_raw = img.save_png_to_buffer()
+
+	current_image_buffer = img_raw
 
 func update_colors(color: Color) -> void:
 	current_color = color

@@ -5,7 +5,7 @@ class_name UserSettings
 @export var uid: String
 @export var username: String
 @export var display_name: String
-@export var picture: ImageTexture
+@export var picture_path: String
 @export var accent_color: Color
 
 @export_category("User LOCALE")
