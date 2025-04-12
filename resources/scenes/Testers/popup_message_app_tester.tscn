@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://iowgyqjj51xh"]
+
+[ext_resource type="Script" path="res://resources/scripts/popup_message_app_tester.gd" id="1_jy27w"]
+
+[node name="PopupMessageAppTESTER" type="Node"]
+script = ExtResource("1_jy27w")

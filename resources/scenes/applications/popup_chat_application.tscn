@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dyklf7egm08qm" path="res://resources/themes/basic_theme.tres" id="1_7r2ik"]
 [ext_resource type="Script" path="res://resources/scripts/message_app/popup_chat_application.gd" id="1_akxes"]
-[ext_resource type="Texture2D" uid="uid://d1sbkb30cycfj" path="res://assets/textures/icons/chat_app_icon_sao_os.png" id="2_kb0l7"]
+[ext_resource type="Texture2D" uid="uid://bopx6f47lqch0" path="res://assets/textures/icons/chat_app_icon_sao_os.png" id="2_kb0l7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i30x7"]
 font_size = 12
@@ -144,6 +144,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_5xq40")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5xq40")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_5xq40")
 theme_override_styles/normal = SubResource("StyleBoxFlat_5xq40")
+icon_alignment = 1
 expand_icon = true
 
 [node name="username_label" type="Label" parent="top_side"]

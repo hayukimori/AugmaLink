@@ -32,7 +32,7 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 shadow_color = Color(0.545098, 0.156863, 0.156863, 0.6)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhhd3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6c1fr"]
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_detail = 20
@@ -148,7 +148,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_yhhd3")
+theme_override_styles/panel = SubResource("StyleBoxFlat_6c1fr")
 script = ExtResource("2_k7k3w")
 corner_detail = 60
 radius_bottom_left = 0
@@ -199,7 +199,7 @@ offset_left = -0.0400085
 offset_right = 0.039978
 grow_horizontal = 2
 grow_vertical = 2
-text = "リズ"
+text = "Chat"
 label_settings = SubResource("LabelSettings_xotft")
 horizontal_alignment = 1
 vertical_alignment = 1

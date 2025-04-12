@@ -4,6 +4,7 @@ extends Control
 @export var username: String = "username"
 @export var timestamp: String = "NOW"
 @export var message: String = "No message."
+@export var user_image: ImageTexture
 
 @onready var app_icon_button: Button = $top_side/app_icon_button
 @onready var user_profile_picture: Button = $top_side/user_profile_picture
@@ -22,8 +23,10 @@ func _ready():
 	username_label.text = username
 	timestamp_label.text = timestamp
 	message_label.text = message
+	user_profile_picture.icon = user_image
 	
 	quit_button.pressed.connect(close_popup)
+
 
 func open_app():
 	pass
