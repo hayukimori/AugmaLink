@@ -7,6 +7,8 @@
 
 # Augma Link
 
+![Fan Project](https://img.shields.io/badge/status-fan--project-blueviolet)
+
 Augma Link is a project that attempts to recreate the interface and functionality of the movie *Sword Art Online: Ordinal Scale*, with icons and functionality created with GDScript. using [Redot Engine](https://www.redotengine.org) as the main engine.
 
 ![screenshot](readme_demos/preview.png)
@@ -86,9 +88,13 @@ They are:
 > [godot-mqtt](https://github.com/goatchurchprime/godot-mqtt) (goatchurchprime)
 
 
-# Warnings
-> I do not own any rights to the work Sword Art Online: Ordinal Scale, or any of the artwork involved.
+# Disclaimer
 
-> This project **does not** aim to make a profit or gain any commercial advantage from the Sword Art Online brand.
+This project is an unofficial recreation of the user interface from the **Augma** device featured in the movie *Sword Art Online: Ordinal Scale* (© Reki Kawahara / A-1 Pictures / Aniplex).
 
-> All applications within this project are made exclusively for learning purposes.
+All rights related to the original design, names, trademarks, and visual elements belong to their respective owners.
+
+This project is created **for educational and fan purposes only**, with no commercial intent.  
+It is not affiliated with the *Sword Art Online* franchise, its creators, or its distributors in any way.
+
+If you are a legal representative and wish to request removal or modification of any content, please contact us through the [Issues](../../issues) tab of this repository.
