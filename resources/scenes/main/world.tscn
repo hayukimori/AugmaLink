@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dj4qfl3we66fr"]
 
-[ext_resource type="Texture2D" uid="uid://day8t826e68pm" path="res://assets/textures/grids/Dark/texture_01.png" id="1_0n8st"]
-[ext_resource type="Script" path="res://resources/scenes/main/world.gd" id="1_17slo"]
-[ext_resource type="Script" path="res://resources/scripts/camera/android_camera.gd" id="2_vpp10"]
+[ext_resource type="Texture2D" uid="uid://di7duod0vs0mi" path="res://assets/textures/grids/Dark/texture_01.png" id="1_0n8st"]
+[ext_resource type="Script" uid="uid://brkpe4hmt482b" path="res://resources/scenes/main/world.gd" id="1_17slo"]
+[ext_resource type="Script" uid="uid://b2u5kmr5amd3w" path="res://resources/scripts/camera/android_camera.gd" id="2_vpp10"]
 [ext_resource type="PackedScene" uid="uid://cbnbvr3o76psi" path="res://resources/scenes/ui/augma_UI.tscn" id="4_snjl1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0cto1"]
